@@ -6,12 +6,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "DSO Database",
-	icons: [
-		{
-			url: "https://dso-database-dun.vercel.app/favicon.ico",
-			type: "image/x-icon",
-		},
-	],
+	icons: {
+		icon: "https://dso-database-dun.vercel.app/favicon.ico",
+	},
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
