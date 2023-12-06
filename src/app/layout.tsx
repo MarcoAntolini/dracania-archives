@@ -1,11 +1,13 @@
+import Footer from "@/app/_components/Footer";
+import Navbar from "@/app/_components/Navbar";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const drakenFont = localFont({ src: "./DrakenFont.ttf" });
 
 export const metadata: Metadata = {
-	title: "DSO Database",
+	title: "Dracania Archives",
 	icons: {
 		icon: "https://dso-database.marcoantolini.com/favicon.ico",
 	},
@@ -17,7 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<link rel="icon" href="https://dso-database.marcoantolini.com/favicon.ico" />
 			</head>
-			<body className={inter.className}>{children}</body>
+			<body className={`${drakenFont.className} pt-[74px] min-h-screen`}>
+				<Navbar />
+				<main>{children}</main>
+				<Footer />
+			</body>
 		</html>
 	);
 }
