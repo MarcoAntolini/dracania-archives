@@ -1,37 +1,39 @@
 {
-  "name": "dso-database",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "next": "13.5.6",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10",
-    "eslint": "^8",
-    "eslint-config-next": "13.5.6",
-    "postcss": "^8",
-    "tailwindcss": "^3",
-    "ts-hover-prettify": "^1.1.0",
-    "typescript": "^5"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "trailingComma": "all",
-    "semi": true,
-    "singleQuote": false,
-    "printWidth": 120,
-    "tabWidth": 2,
-    "useTabs": true
-  }
+	"name": "dso-database",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"next": "13.5.6",
+		"react": "^18",
+		"react-dom": "^18"
+	},
+	"devDependencies": {
+		"@types/node": "^20",
+		"@types/react": "^18",
+		"@types/react-dom": "^18",
+		"autoprefixer": "^10",
+		"dso-database": "^2.0.0",
+		"eslint": "^8",
+		"eslint-config-next": "13.5.6",
+		"postcss": "^8",
+		"postcss-nesting": "^12.0.1",
+		"tailwindcss": "^3",
+		"ts-hover-prettify": "^1.1.0",
+		"typescript": "^5.2.2"
+	},
+	"prettier": {
+		"arrowParens": "always",
+		"trailingComma": "all",
+		"semi": true,
+		"singleQuote": false,
+		"printWidth": 120,
+		"tabWidth": 2,
+		"useTabs": true
+	}
 }
