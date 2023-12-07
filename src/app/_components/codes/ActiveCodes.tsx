@@ -64,7 +64,7 @@ export default function ActiveCodes() {
 										  } `
 										: `${
 												weeksLeft > 0 ? `${weeksLeft == 1 ? `${weeksLeft} week and ` : `${weeksLeft} weeks and `}` : ""
-										  }${daysLeft > 0 ? `${daysLeft == 1 ? `${daysLeft} day and ` : `${daysLeft} days left`} ` : ""}
+										  }${daysLeft > 0 ? `${daysLeft == 1 ? `${daysLeft} day left ` : `${daysLeft} days left`} ` : ""}
 										`}
 								</p>
 							</div>

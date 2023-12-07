@@ -9,6 +9,8 @@ export default function About() {
 				<p>
 					Dracania Archives is a database of items from the game Drakensang Online, with the goal of expanding the
 					website to include more features and informations about the game.
+					<br />
+					Images, fonts and other assets on this website are property of Bigpoint GmbH.
 				</p>
 			</section>
 			<section>
