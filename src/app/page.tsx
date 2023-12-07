@@ -19,7 +19,7 @@ export default function Home() {
 			/>
 			<Separator color="#cdb485" />
 			<h1 className="text-4xl md:text-5xl text-main-color text-center my-6 mx-4">Welcome to Dracania Archives</h1>
-			<div className="flex flex-col md:flex-row justify-center items-center w-full mb-4 gap-4 md:gap-16">
+			<div className="flex flex-col lg:flex-row justify-center items-center w-full mb-4 gap-4 md:gap-10 lg:gap-16">
 				<News />
 				<ActiveCodes />
 			</div>
@@ -29,7 +29,7 @@ export default function Home() {
 
 function News() {
 	return (
-		<div className="md:w-[50%] max-w-[90%] border border-main-color rounded-lg p-5">
+		<div className="lg:w-[50%] max-w-[90%] border border-main-color rounded-lg p-5">
 			<h2 className="text-2xl font-semibold text-main-color">News</h2>
 			<ol className="relative border-s border-main-color">
 				{news.slice(0, 3).map((n, idx) => (

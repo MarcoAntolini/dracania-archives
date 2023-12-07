@@ -2,7 +2,7 @@ import contributors from "./contributors";
 
 export default function About() {
 	return (
-		<div className="max-w-screen-xl mx-auto px-3 pb-[20px] md:px-4">
+		<div className="max-w-screen-xl mx-3 md:mx-auto px-3 pb-[20px] md:px-4">
 			<h1 className="text-2xl text-main-color font-bold text-center pt-5">About the project</h1>
 			<section>
 				<h2 className="text-xl text-main-color mt-5 mb-2">What is Dracania Archives?</h2>

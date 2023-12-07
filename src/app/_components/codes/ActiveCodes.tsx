@@ -21,7 +21,7 @@ export default function ActiveCodes() {
 		.sort((a, b) => a.secondsLeft! - b.secondsLeft!);
 
 	return (
-		<div className="md:w-[450px] max-w-[90%] w-[90%] border border-main-color rounded-lg p-5">
+		<div className="lg:w-[450px] max-w-[90%] w-[90%] border border-main-color rounded-lg p-5">
 			<h2 className="text-2xl font-semibold text-main-color">Active Codes</h2>
 			<ul>
 				{activeCodes.map((code) => {
@@ -34,8 +34,6 @@ export default function ActiveCodes() {
 					const hoursLeft = Math.floor(code.secondsLeft / 60 / 60) % 24;
 					const daysLeft = Math.floor(code.secondsLeft / 60 / 60 / 24) % 7;
 					const weeksLeft = Math.floor(code.secondsLeft / 60 / 60 / 24 / 7);
-					if (code.code == "SNOWMAN7")
-						console.log({ percentageElapsed, totalMilliseconds, totalSeconds, code, now, expirationDate, releaseDate });
 					return (
 						<li key={code.code} className="my-5">
 							<div className="flex justify-between">
