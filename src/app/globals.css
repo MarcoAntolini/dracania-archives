@@ -40,6 +40,12 @@ main {
 	background-color: #cdb485;
 }
 
+.hover\:bg-main-color {
+	&:hover {
+		background-color: #cdb485;
+	}
+}
+
 .border-main-color {
 	border-color: #cdb485;
 }
