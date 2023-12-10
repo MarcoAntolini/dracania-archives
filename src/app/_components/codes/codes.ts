@@ -55,6 +55,11 @@ const codes: Code[] = [
 		expirationDate: "2024-01-01",
 		releaseDate: "2023-12-09",
 	},
+	{
+		code: "HOLIDAY10",
+		expirationDate: "2024-01-01",
+		releaseDate: "2023-12-10",
+	},
 ];
 
 export default codes;

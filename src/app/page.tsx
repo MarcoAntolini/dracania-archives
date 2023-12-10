@@ -29,7 +29,7 @@ export default function Home() {
 
 function News() {
 	return (
-		<div className="lg:w-[50%] max-w-[90%] border border-main-color rounded-lg p-5">
+		<div className="lg:w-[50%] max-w-[90%] border border-main-color rounded-lg p-5 pb-7">
 			<h2 className="text-2xl font-semibold text-main-color">News</h2>
 			<ol className="relative border-s border-main-color">
 				{news.slice(0, 3).map((n, idx) => (

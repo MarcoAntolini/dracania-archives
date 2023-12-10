@@ -9,7 +9,7 @@ export default function Changelog() {
 	const totalNews = news.length;
 
 	return (
-		<div className="px-3 md:px-5 pt-9 pb-6 md:max-w-screen-xl mx-auto max-w-full">
+		<div className="px-3 md:px-5 py-9 md:max-w-screen-xl mx-auto max-w-full">
 			<h1 className="text-2xl text-main-color mb-2">Changelog</h1>
 			<ol className="relative border-s border-main-color">
 				{news.slice(0, displayCount).map((n, idx) => (

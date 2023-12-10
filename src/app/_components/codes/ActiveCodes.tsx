@@ -41,10 +41,10 @@ export default function ActiveCodes() {
 						<li key={code.code} className="mt-4">
 							<div className="flex justify-between">
 								<span className={`${inter.className} text-main-color`}>{code.code}</span>
-								<p className="text-[#565656]">Expires on {code.expirationDate}</p>
+								<p className="text-[#565656] text-sm md:text-base">Expires on {code.expirationDate}</p>
 							</div>
 							<div className="flex gap-2 md:gap-3">
-								<div className="w-[150px] md:w-[180px] h-[15px] rounded mt-1 bg-stone-300">
+								<div className="w-[130px] min-w-[130px] max-w-[130px] md:w-[180px] md:min-w-[180px] md:max-w-[180px] h-[15px] rounded mt-1 bg-stone-300">
 									<div
 										style={{ width: `${code.percentageElapsed}%` }}
 										className={`${
@@ -60,31 +60,34 @@ export default function ActiveCodes() {
 									{code.secondsLeft <= 86400
 										? `${
 												code.hoursLeft > 0
-													? `${code.hoursLeft == 1 ? `${code.hoursLeft} hour and ` : `${code.hoursLeft} hours and `}`
+													? `${code.hoursLeft == 1 ? `${code.hoursLeft} hour` : `${code.hoursLeft} hours`}`
 													: ""
 										  }${
-												code.minutesLeft == 1 ? `${code.minutesLeft} minute left` : `${code.minutesLeft} minutes left`
-										  } `
+												code.minutesLeft > 0
+													? ` and ${
+															code.minutesLeft == 1 ? `${code.minutesLeft} minute` : `${code.minutesLeft} minutes`
+													  }`
+													: ""
+										  } left`
 										: code.secondsLeft <= 604800
 										? `${
 												code.daysLeft > 0
-													? `${code.daysLeft == 1 ? `${code.daysLeft} day and ` : `${code.daysLeft} days and `}`
+													? `${code.daysLeft == 1 ? `${code.daysLeft} day` : `${code.daysLeft} days`}`
 													: ""
 										  }${
-												code.hoursLeft % 24 == 1
-													? `${code.hoursLeft % 24} hour left`
-													: `${code.hoursLeft % 24} hours left`
-										  } `
+												code.hoursLeft > 0
+													? ` and ${code.hoursLeft == 1 ? `${code.hoursLeft} hour` : `${code.hoursLeft} hours`}`
+													: ""
+										  } left`
 										: `${
 												code.weeksLeft > 0
-													? `${code.weeksLeft == 1 ? `${code.weeksLeft} week and ` : `${code.weeksLeft} weeks and `}`
+													? `${code.weeksLeft == 1 ? `${code.weeksLeft} week` : `${code.weeksLeft} weeks`}`
 													: ""
 										  }${
 												code.daysLeft > 0
-													? `${code.daysLeft == 1 ? `${code.daysLeft} day left ` : `${code.daysLeft} days left`} `
+													? ` and ${code.daysLeft == 1 ? `${code.daysLeft} day` : `${code.daysLeft} days`} `
 													: ""
-										  }
-										`}
+										  } left`}
 								</p>
 							</div>
 						</li>
