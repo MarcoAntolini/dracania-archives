@@ -24,7 +24,7 @@ export default function ActiveCodes() {
 			const hoursLeft = Math.floor(secondsLeft / 60 / 60) % 24;
 			const daysLeft = Math.floor(secondsLeft / 60 / 60 / 24) % 7;
 			const weeksLeft = Math.floor(secondsLeft / 60 / 60 / 24 / 7);
-			const releaseDate = new Date(code.releaseDate).getTime() - 2000000;
+			const releaseDate = new Date(code.releaseDate).getTime() - 3600000;
 			const totalMilliseconds = expirationDate - releaseDate;
 			const totalSeconds = Math.max(0, Math.floor(totalMilliseconds / 1000));
 			const percentageElapsed = Math.floor(((totalSeconds - secondsLeft) / totalSeconds) * 100);

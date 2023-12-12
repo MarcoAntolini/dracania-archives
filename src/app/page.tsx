@@ -38,7 +38,7 @@ function News() {
 						<time className="mb-1 text-sm font-normal leading-none text-[#565656]">{n.date}</time>
 						<h3 className="text-lg font-semibold text-white">{n.title}</h3>
 						<div className="mb-4 text-base font-normal text-gray-400">
-							<ul className="pl-4">
+							<ul className="pl-5">
 								{n.changes.map((c, i) => (
 									<li key={i} className="list-disc py-1">
 										{c}

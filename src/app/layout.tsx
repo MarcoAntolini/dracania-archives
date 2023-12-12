@@ -9,7 +9,7 @@ const drakenFont = localFont({ src: "./DrakenFont.ttf" });
 export const metadata: Metadata = {
 	title: "Dracania Archives",
 	icons: {
-		icon: "https://dso-database.marcoantolini.com/favicon.ico",
+		icon: "https://dracania-archives.com/favicon.ico",
 	},
 };
 
@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 	return (
 		<html lang="en">
 			<head>
-				<link rel="icon" href="https://dso-database.marcoantolini.com/favicon.ico" />
+				<link rel="icon" href="https://dracania-archives.com/favicon.ico" />
 			</head>
 			<body className={`${drakenFont.className} pt-[74px] min-h-screen`}>
 				<Navbar />
