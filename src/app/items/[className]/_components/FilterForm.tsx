@@ -173,15 +173,6 @@ export default function FilterForm({
 				>
 					Reset
 				</button>
-				{/* <button
-					className="filter-input filter-button"
-					onClick={async () => {
-						await fetchAndSetItems();
-						resetPage();
-					}}
-				>
-					Filter
-				</button> */}
 			</div>
 		</div>
 	);
