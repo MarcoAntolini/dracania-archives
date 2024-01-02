@@ -164,10 +164,16 @@ export default function FilterForm({
 				/>
 			</div>
 			<div className="flex justify-between gap-4">
-				<button className="filter-input filter-button" onClick={resetFilters}>
+				<button
+					className="filter-input filter-button"
+					onClick={() => {
+						resetFilters();
+						resetPage();
+					}}
+				>
 					Reset
 				</button>
-				<button
+				{/* <button
 					className="filter-input filter-button"
 					onClick={async () => {
 						await fetchAndSetItems();
@@ -175,7 +181,7 @@ export default function FilterForm({
 					}}
 				>
 					Filter
-				</button>
+				</button> */}
 			</div>
 		</div>
 	);
