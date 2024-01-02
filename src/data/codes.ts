@@ -70,6 +70,16 @@ const codes: Code[] = [
 		expirationDate: "2024-01-01",
 		releaseDate: "2023-12-12",
 	},
+	{
+		code: "SLIPPY13",
+		expirationDate: "2024-01-01",
+		releaseDate: "2023-12-13",
+	},
+	{
+		code: "WINTERWONDER14",
+		expirationDate: "2024-01-01",
+		releaseDate: "2023-12-14",
+	},
 ];
 
 export default codes;

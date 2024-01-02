@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<link rel="icon" href="https://dracania-archives.com/favicon.ico" />
 			</head>
-			<body className={`${drakenFont.className} pt-[74px] min-h-screen`}>
+			<body className={`${drakenFont.className} min-h-screen pt-[74px]`}>
 				<Navbar />
 				<main>{children}</main>
 				<Footer />

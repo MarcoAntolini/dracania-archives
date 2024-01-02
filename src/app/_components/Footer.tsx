@@ -1,8 +1,8 @@
 export default function Footer() {
 	return (
-		<footer className="rounded-lg shadow m-3 md:m-4 bg-[#383838a2]">
-			<div className="w-full mx-auto max-w-screen-xl p-3 md:p-4 md:flex md:items-center justify-center text-center">
-				<span className="text-xs md:text-sm text-gray-400">
+		<footer className="m-3 rounded-lg bg-[#383838a2] shadow md:m-4">
+			<div className="mx-auto w-full max-w-screen-xl justify-center p-3 text-center md:flex md:items-center md:p-4">
+				<span className="text-xs text-gray-400 md:text-sm">
 					© 2023 Dracania Archives™, created by{" "}
 					<a href="https://marcoantolini.com/" className="hover:underline">
 						Marco Antolini

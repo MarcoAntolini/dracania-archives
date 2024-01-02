@@ -51,30 +51,30 @@ export default function Navbar() {
 	}, [isMenuVisible]);
 
 	return (
-		<nav className="menu bg-[#212121] fixed max-w-full w-full z-20 top-0 start-0">
+		<nav className="menu bg-dark fixed start-0 top-0 z-20 w-full max-w-full">
 			<div className="max-w-screen flex flex-wrap items-center justify-center p-3">
 				<div className="mr-auto">
 					<Link
 						href="/"
-						className="flex items-center space-x-3 rtl:space-x-reverse mr-auto"
+						className="mr-auto flex items-center space-x-3 rtl:space-x-reverse"
 						onClick={() => setIsMenuVisible(false)}
 					>
 						<Image src="/images/website-logo.png" alt="Dracania Archives logo" width={50} height={50} />
-						<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Dracania Archives</span>
+						<span className="self-center whitespace-nowrap text-2xl font-semibold text-white">Dracania Archives</span>
 					</Link>
 				</div>
-				<div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse md:hidden">
+				<div className="flex space-x-3 rtl:space-x-reverse md:order-2 md:hidden md:space-x-0">
 					<button
 						data-collapse-toggle="navbar-sticky"
 						type="button"
 						onClick={() => setIsMenuVisible(!isMenuVisible)}
-						className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-[#cdb485a2]"
+						className="inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#cdb485a2] md:hidden"
 						aria-controls="navbar-sticky"
 						aria-expanded={isMenuVisible ? "true" : "false"}
 					>
 						<span className="sr-only">Open main menu</span>
 						<svg
-							className="w-5 h-5"
+							className="h-5 w-5"
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
 							fill="none"
@@ -92,18 +92,18 @@ export default function Navbar() {
 				</div>
 				<div
 					ref={menuRef}
-					className={`items-center md:absolute md:left-[50%] md:translate-x-[-50%] justify-between w-full md:flex md:w-auto md:order-1 ${
+					className={`w-full items-center justify-between md:absolute md:left-[50%] md:order-1 md:flex md:w-auto md:translate-x-[-50%] ${
 						isMenuVisible ? "" : "hidden"
 					}`}
 					id="navbar-sticky"
 				>
-					<ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-[#383838] md:bg-[#212121] border-[#cdb485]">
+					<ul className="md:bg-dark bg-light mt-4 flex flex-col rounded-lg border border-[#cdb485] p-4 font-medium rtl:space-x-reverse md:mt-0 md:flex-row md:space-x-8 md:border-0 md:p-0">
 						{navbarLinks.map((link) => (
 							<li key={link.name}>
 								<Link
 									href={link.href}
 									onClick={() => setIsMenuVisible(false)}
-									className="block py-2 px-3 rounded md:p-0 text-xl text-white hover:bg-[#6B6B6B] hover:text-white md:hover:bg-transparent border-gray-700"
+									className="block rounded border-gray-700 px-3 py-2 text-xl text-white hover:bg-[#6B6B6B] hover:text-white md:p-0 md:hover:bg-transparent"
 								>
 									{link.name}
 								</Link>
@@ -114,8 +114,8 @@ export default function Navbar() {
 				<div
 					ref={iconsRef}
 					className={`md:order-2 md:ml-auto ${
-						isMenuVisible ? "flex justify-end mt-3" : "hidden"
-					} md:flex md:justify-end gap-3 `}
+						isMenuVisible ? "mt-3 flex justify-end" : "hidden"
+					} gap-3 md:flex md:justify-end `}
 					id="icons"
 				>
 					<Link href="https://discord.gg/BJ9cdtjBmt" rel="noopener noreferrer" target="_blank">

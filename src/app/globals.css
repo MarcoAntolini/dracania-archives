@@ -3,11 +3,18 @@
 @tailwind utilities;
 
 :root {
-	--foreground-rgb: 255, 255, 255;
-	--background-start-rgb: 0, 0, 0;
-	--background-end-rgb: 0, 0, 0;
+	--main-color: #cdb485;
+	--background-color: #121212;
+	--dark-color: #212121;
+	--light-color: #383838;
+}
 
-	--color-menu-hover: #cdb485;
+*:focus-visible {
+	outline: var(--main-color) auto 1px;
+}
+
+.mouse-focus :focus-visible {
+	outline: none;
 }
 
 html {
@@ -15,39 +22,71 @@ html {
 }
 
 body {
-	color: rgb(var(--foreground-rgb));
-	background-color: #121212;
+	color: rgb(255, 255, 255);
+	background-color: var(--background-color);
 }
 
 main {
-	--nav-height: 74px;
-	--footer-height: 52px;
-	--footer-margin: 1rem;
-	min-height: calc(100vh - var(--nav-height) - var(--footer-height) - var(--footer-margin) * 2);
+	& > * {
+		--nav-height: 74px;
+		--footer-height: 52px;
+		--footer-margin: 1rem;
+		min-height: calc(100vh - var(--nav-height) - var(--footer-height) - var(--footer-margin) * 2);
+	}
 }
 
 @media (min-width: 768px) {
 	.menu li :hover {
-		color: var(--color-menu-hover);
+		color: var(--main-color);
 	}
 }
 
-.text-main-color {
-	color: #cdb485;
+.text-main {
+	color: var(--main-color);
 }
 
-.bg-main-color {
-	background-color: #cdb485;
+.bg-main {
+	background-color: var(--main-color);
 }
 
-.hover\:bg-main-color {
+.hover\:bg-main {
 	&:hover {
-		background-color: #cdb485;
+		background-color: var(--main-color);
 	}
 }
 
-.border-main-color {
-	border-color: #cdb485;
+.border-main {
+	border-color: var(--main-color);
+}
+
+.bg-dark {
+	background-color: var(--dark-color);
+}
+
+.md\:bg-dark {
+	@media (min-width: 768px) {
+		background-color: var(--dark-color) !important;
+	}
+}
+
+.hover\:bg-dark {
+	&:hover {
+		background-color: var(--dark-color);
+	}
+}
+
+.border-dark {
+	border-color: var(--dark-color);
+}
+
+.bg-light {
+	background-color: var(--light-color);
+}
+
+.hover\:bg-light {
+	&:hover {
+		background-color: var(--light-color);
+	}
 }
 
 .item {
@@ -79,7 +118,7 @@ main {
 	font-family: var(--font-item);
 	background-color: var(--color-background);
 	border: 1px solid var(--color-item-border);
-	border-radius: 2px;
+	border-radius: 5px;
 
 	.slot {
 		font-size: var(--size-m);
@@ -163,4 +202,20 @@ main {
 		font-size: var(--size-m);
 		color: var(--color-mythic-label);
 	}
+}
+
+.arrow {
+	@apply border-dark bg-dark hover:bg-light flex h-8 items-center justify-center border px-3 leading-tight text-gray-400 hover:text-white;
+}
+
+.disabled-arrow {
+	@apply border-dark bg-dark flex h-8 items-center justify-center border px-3 leading-tight text-gray-400;
+}
+
+.filter-input {
+	@apply bg-dark hover:bg-light flex items-center justify-center rounded-lg border border-[#423d34] p-2.5 font-medium leading-tight;
+}
+
+.filter-button {
+	@apply !px-5 !py-2.5 text-gray-400 hover:text-white lg:!px-7;
 }

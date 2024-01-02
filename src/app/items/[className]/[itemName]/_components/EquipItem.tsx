@@ -1,9 +1,9 @@
-import Separator from "@components/Separator";
+import Separator from "@/components/Separator";
 import { Rarities, type Bonus, type Item, type MythicItem, type SetItem, type UniqueItem } from "dso-database";
 
 export default function EquipItem({ item }: { item: Item }) {
 	return (
-		<div className="item flex flex-col p-4 w-[500px] max-w-[95vw]">
+		<div className="item flex h-fit w-[500px] max-w-[95vw] flex-col p-4">
 			<h1 className={`${item.rarity.split(" ")[0].toLowerCase().concat("-name")} text-center`}>{item.name}</h1>
 			<div className="my-1">
 				<p className={item.rarity.split(" ")[0].toLowerCase().concat("-label")}>{item.rarity}</p>
@@ -81,3 +81,7 @@ function EquipItemMythic({ item }: { item: MythicItem }) {
 function getBonus({ bonus }: { bonus: Bonus }) {
 	return typeof bonus === "string" ? bonus : `+ ${bonus.value} ${bonus.stat}`;
 }
+
+// TODO fare i tipi in questo modo?
+// type Bonuss = `+ ${number}-${number} ${StatType}`;
+// const bonus: Bonuss = "+ 56-135 Damage";

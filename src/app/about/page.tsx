@@ -1,11 +1,11 @@
-import contributors from "./contributors";
+import contributors from "@/data/contributors";
 
 export default function About() {
 	return (
-		<div className="max-w-screen-xl mx-3 md:mx-auto px-3 pb-[20px] md:px-4">
-			<h1 className="text-2xl text-main-color font-bold text-center pt-5">About the project</h1>
+		<div className="mx-3 max-w-screen-xl px-3 pb-[20px] md:mx-auto md:px-4">
+			<h1 className="text-main pt-5 text-center text-2xl font-bold">About the project</h1>
 			<section>
-				<h2 className="text-xl text-main-color mt-5 mb-2">What is Dracania Archives?</h2>
+				<h2 className="text-main mb-2 mt-5 text-xl">What is Dracania Archives?</h2>
 				<p>
 					Dracania Archives is a database of items from the game Drakensang Online, with the goal of expanding the
 					website to include more features and informations about the game.
@@ -14,14 +14,14 @@ export default function About() {
 				</p>
 			</section>
 			<section>
-				<h2 className="text-xl text-main-color mt-5 mb-2">Community</h2>
+				<h2 className="text-main mb-2 mt-5 text-xl">Community</h2>
 				<p>
 					We have a Discord server where you can discuss about the project, suggest new features and more.
 					<br />
 					You can join the server by clicking{" "}
 					<a
 						href="https://discord.gg/BJ9cdtjBmt"
-						className="underline hover:text-main-color"
+						className="hover:text-main underline"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -32,7 +32,7 @@ export default function About() {
 					You can also join the discussion section on GitHub by clicking{" "}
 					<a
 						href="https://github.com/MarcoAntolini/dracania-archives/discussions"
-						className="underline hover:text-main-color"
+						className="hover:text-main underline"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -42,12 +42,12 @@ export default function About() {
 				</p>
 			</section>
 			<section>
-				<h2 className="text-xl text-main-color mt-5 mb-2">Contribution</h2>
+				<h2 className="text-main mb-2 mt-5 text-xl">Contribution</h2>
 				<p>
 					Dracania Archives is an open source project created and maintained by{" "}
 					<a
 						href="https://marcoantolini.com/"
-						className="underline hover:text-main-color"
+						className="hover:text-main underline"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -58,7 +58,7 @@ export default function About() {
 					The source code is available on{" "}
 					<a
 						href="https://github.com/MarcoAntolini/dracania-archives"
-						className="underline hover:text-main-color"
+						className="hover:text-main underline"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -67,13 +67,13 @@ export default function About() {
 					and you can contribute to the project by opening a pull request or an issue on GitHub.
 				</p>
 				<div className="pl-4">
-					<h3 className="text-lg text-main-color mt-2 mb-1">Contributors</h3>
-					<ul className="list-disc list-inside">
+					<h3 className="text-main mb-1 mt-2 text-lg">Contributors</h3>
+					<ul className="list-inside list-disc">
 						{contributors.map((contributor) => (
 							<li key={contributor.name}>
 								<a
 									href={contributor.github}
-									className="underline hover:text-main-color"
+									className="hover:text-main underline"
 									target="_blank"
 									rel="noopener noreferrer"
 								>
@@ -86,7 +86,7 @@ export default function About() {
 												{role}
 												{i !== contributor.role.length - 1 && ", "}
 											</>
-									  ))
+										))
 									: contributor.role}
 								)
 							</li>
