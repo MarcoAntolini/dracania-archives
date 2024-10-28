@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function POST(req: NextRequest, res: NextResponse) {
 	let ipAddress = req.headers.get("x-real-ip") as string;
 	const forwardedFor = req.headers.get("x-forwarded-for") as string;
