@@ -9,6 +9,7 @@ import type { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import type { Item } from "@/types/items";
 import { useMutation, useQuery } from "convex/react";
+import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -82,6 +83,7 @@ export default function TesterPage() {
 						</Select>
 						{selectedItem && (
 							<div className="flex flex-col items-center gap-4">
+								<Image src={`/images/db/items/${selectedItem.image}.png`} alt={selectedItem.name} width={100} height={100} />
 								<EquipItem item={selectedItem} />
 								<Button onClick={async () => await approveItem()}>Approve Item</Button>
 							</div>
