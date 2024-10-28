@@ -54,7 +54,7 @@ export default function TesterPage() {
 
 	return (
 		<div className="flex flex-col items-center justify-center px-6 py-10 md:px-10">
-			{!authenticated ? (
+			{authenticated ? (
 				<div className="flex flex-col items-center gap-8">
 					<h2 className="text-2xl font-bold text-custom-main">Approve Items</h2>
 					<div className="flex flex-col gap-4 md:flex-row">
