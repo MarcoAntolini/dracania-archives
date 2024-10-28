@@ -6,26 +6,35 @@ import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { runes } from "@/data/db/runes";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RunesPage() {
 	const [search, setSearch] = useState("");
 
 	const [tooltipOpen, setTooltipOpen] = useState<Record<string, boolean[]>>({});
 
-	const toggleTooltip = (runeName: string, rarityIndex: number) => {
+	useEffect(() => {
+		const newTooltipState = runes.reduce(
+			(acc, rune) => {
+				acc[rune.name] = rune.type === "unique" ? [false] : Array(5).fill(false);
+				return acc;
+			},
+			{} as Record<string, boolean[]>,
+		);
+		setTooltipOpen(newTooltipState);
+	}, []);
+
+	const toggleTooltip = (runeName: string, rarityIndex: number, open?: boolean) => {
 		setTooltipOpen((prev) => {
-			const newTooltipState = Object.keys(prev).reduce(
-				(acc, key) => {
-					acc[key] = [false, false, false, false, false];
-					return acc;
-				},
-				{} as Record<string, boolean[]>,
-			);
-			const currentRarityState = newTooltipState[runeName] || [false, false, false, false, false];
-			const newRarityState = [...currentRarityState];
-			newRarityState[rarityIndex] = !currentRarityState[rarityIndex];
-			return { ...newTooltipState, [runeName]: newRarityState };
+			const newTooltipState = { ...prev };
+			Object.keys(newTooltipState).forEach((key) => {
+				newTooltipState[key] = Array(newTooltipState[key].length).fill(false);
+			});
+			return newTooltipState;
+		});
+		setTooltipOpen((prev) => {
+			prev[runeName][rarityIndex] = open ?? !prev[runeName]?.[rarityIndex];
+			return prev;
 		});
 	};
 
@@ -64,7 +73,8 @@ export default function RunesPage() {
 										<Tooltip
 											delayDuration={0}
 											open={tooltipOpen[rune.name]?.[0]}
-											onOpenChange={() => toggleTooltip(rune.name, 0)}
+											onOpenChange={(open) => toggleTooltip(rune.name, 0, open)}
+											disableHoverableContent
 										>
 											<TooltipTrigger>
 												<div className="relative h-[100px] w-[100px]" onClick={() => toggleTooltip(rune.name, 0)}>
@@ -95,7 +105,8 @@ export default function RunesPage() {
 												key={index}
 												delayDuration={0}
 												open={tooltipOpen[rune.name]?.[index + 1]}
-												onOpenChange={() => toggleTooltip(rune.name, index + 1)}
+												onOpenChange={(open) => toggleTooltip(rune.name, index + 1, open)}
+												disableHoverableContent
 											>
 												<TooltipTrigger>
 													<div

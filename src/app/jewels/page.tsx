@@ -6,26 +6,36 @@ import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { jewels } from "@/data/db/jewels";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function JewelsPage() {
 	const [search, setSearch] = useState("");
 
 	const [tooltipOpen, setTooltipOpen] = useState<Record<string, boolean[]>>({});
 
-	const toggleTooltip = (jewelName: string, rarityIndex: number) => {
+	useEffect(() => {
+		const newTooltipState = jewels.reduce(
+			(acc, jewel) => {
+				acc[jewel.name] =
+					jewel.type === "mythic" ? [false] : jewel.type === "magic" ? Array(3).fill(false) : Array(5).fill(false);
+				return acc;
+			},
+			{} as Record<string, boolean[]>,
+		);
+		setTooltipOpen(newTooltipState);
+	}, []);
+
+	const toggleTooltip = (jewelName: string, rarityIndex: number, open?: boolean) => {
 		setTooltipOpen((prev) => {
-			const newTooltipState = Object.keys(prev).reduce(
-				(acc, key) => {
-					acc[key] = [false, false, false, false, false, false];
-					return acc;
-				},
-				{} as Record<string, boolean[]>,
-			);
-			const currentRarityState = newTooltipState[jewelName] || [false, false, false, false, false, false];
-			const newRarityState = [...currentRarityState];
-			newRarityState[rarityIndex] = !currentRarityState[rarityIndex];
-			return { ...newTooltipState, [jewelName]: newRarityState };
+			const newTooltipState = { ...prev };
+			Object.keys(newTooltipState).forEach((key) => {
+				newTooltipState[key] = Array(newTooltipState[key].length).fill(false);
+			});
+			return newTooltipState;
+		});
+		setTooltipOpen((prev) => {
+			prev[jewelName][rarityIndex] = open ?? !prev[jewelName]?.[rarityIndex];
+			return prev;
 		});
 	};
 
@@ -71,7 +81,8 @@ export default function JewelsPage() {
 										<Tooltip
 											delayDuration={0}
 											open={tooltipOpen[jewel.name]?.[0]}
-											onOpenChange={() => toggleTooltip(jewel.name, 0)}
+											onOpenChange={(open) => toggleTooltip(jewel.name, 0, open)}
+											disableHoverableContent
 										>
 											<TooltipTrigger>
 												<div className="relative h-[100px] w-[100px]" onClick={() => toggleTooltip(jewel.name, 0)}>
@@ -102,7 +113,8 @@ export default function JewelsPage() {
 												key={index}
 												delayDuration={0}
 												open={tooltipOpen[jewel.name]?.[index + 1]}
-												onOpenChange={() => toggleTooltip(jewel.name, index + 1)}
+												onOpenChange={(open) => toggleTooltip(jewel.name, index + 1, open)}
+												disableHoverableContent
 											>
 												<TooltipTrigger>
 													<div
@@ -137,7 +149,8 @@ export default function JewelsPage() {
 												key={index}
 												delayDuration={0}
 												open={tooltipOpen[jewel.name]?.[index + 1]}
-												onOpenChange={() => toggleTooltip(jewel.name, index + 1)}
+												onOpenChange={(open) => toggleTooltip(jewel.name, index + 1, open)}
+												disableHoverableContent
 											>
 												<TooltipTrigger>
 													<div
