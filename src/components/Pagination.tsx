@@ -1,84 +1,55 @@
-"use client";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+import { Button } from "./ui/button";
 
 export default function Pagination({
 	items,
 	itemsPerPage,
 	currentPage,
 	setCurrentPage,
+	itemsName,
 }: {
 	items: number;
 	itemsPerPage: number;
 	currentPage: number;
-	setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+	setCurrentPage: Dispatch<SetStateAction<number>>;
+	itemsName: string;
 }) {
 	const pages = Math.ceil(items / itemsPerPage);
-	const arrowsClassname =
-		"flex items-center justify-center px-3 h-8 leading-tight border bg-[#212121] border-[#212121] text-gray-400 hover:bg-[#383838] hover:text-white";
+
+	const isNextDisabled = currentPage === pages || pages === 0;
+	const isPrevDisabled = currentPage === 1 || pages === 0;
 
 	return (
-		pages > 1 && (
-			<nav aria-label="Page navigation example" className="mt-6">
-				<ul className="flex items-center -space-x-px h-8 text-sm">
-					<li>
-						<button
-							className={`${arrowsClassname} ms-0 border-e-0 rounded-s-lg`}
-							onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-						>
-							<span className="sr-only">Previous</span>
-							<svg
-								className="w-2.5 h-2.5 rtl:rotate-180"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 6 10"
-							>
-								<path
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="M5 1 1 5l4 4"
-								/>
-							</svg>
-						</button>
-					</li>
-					{Array.from({ length: pages }, (_, i) => (
-						<li key={i}>
-							<button
-								className={`flex items-center justify-center px-3 h-8 leading-tight border border-[#212121] text-gray-400 hover:bg-[#383838] hover:text-white
-								${currentPage == i + 1 ? "bg-[#383838] text-white" : ""}
-								`}
-								onClick={() => setCurrentPage(i + 1)}
-							>
-								{i + 1}
-							</button>
-						</li>
-					))}
-					<li>
-						<button
-							className={`${arrowsClassname} rounded-e-lg`}
-							onClick={() => setCurrentPage((prev) => Math.min(pages, prev + 1))}
-						>
-							<span className="sr-only">Next</span>
-							<svg
-								className="w-2.5 h-2.5 rtl:rotate-180"
-								aria-hidden="true"
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 6 10"
-							>
-								<path
-									stroke="currentColor"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									strokeWidth="2"
-									d="m1 9 4-4-4-4"
-								/>
-							</svg>
-						</button>
-					</li>
-				</ul>
-			</nav>
-		)
+		<nav aria-label="page navigation" className="mt-6 flex flex-col gap-2">
+			<ul className="flex h-8 items-center justify-center gap-2 -space-x-px text-sm">
+				<li>
+					<Button
+						variant="outline"
+						onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+						disabled={isPrevDisabled}
+					>
+						<ChevronLeft />
+						<span className="ml-1">Prev</span>
+					</Button>
+				</li>
+				<li>
+					<Button
+						variant="outline"
+						onClick={() => setCurrentPage((prev) => Math.min(pages, prev + 1))}
+						disabled={isNextDisabled}
+					>
+						<span className="mr-1">Next</span>
+						<ChevronRight />
+					</Button>
+				</li>
+			</ul>
+			<div className="flex justify-center pt-2 text-xs text-gray-400" style={{}}>
+				Showing <span className="mx-1 text-custom-main">{items === 0 ? 0 : itemsPerPage * (currentPage - 1) + 1}</span>
+				to <span className="mx-1 text-custom-main">{Math.min(itemsPerPage * currentPage, items)}</span>
+				of <span className="mx-1 text-custom-main">{items}</span>
+				{itemsName}
+			</div>
+		</nav>
 	);
 }

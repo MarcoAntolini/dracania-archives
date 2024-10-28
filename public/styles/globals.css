@@ -1,0 +1,293 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 0 0% 100%;
+		--foreground: 0 0% 3.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 3.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 3.9%;
+		--primary: 0 0% 9%;
+		--primary-foreground: 0 0% 98%;
+		--secondary: 0 0% 96.1%;
+		--secondary-foreground: 0 0% 9%;
+		--muted: 0 0% 96.1%;
+		--muted-foreground: 0 0% 45.1%;
+		--accent: 0 0% 96.1%;
+		--accent-foreground: 0 0% 9%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 89.8%;
+		--input: 0 0% 89.8%;
+		--ring: 0 0% 3.9%;
+		--chart-1: 12 76% 61%;
+		--chart-2: 173 58% 39%;
+		--chart-3: 197 37% 24%;
+		--chart-4: 43 74% 66%;
+		--chart-5: 27 87% 67%;
+		--radius: 0.5rem;
+		--sidebar-background: 0 0% 98%;
+		--sidebar-foreground: 240 5.3% 26.1%;
+		--sidebar-primary: 240 5.9% 10%;
+		--sidebar-primary-foreground: 0 0% 98%;
+		--sidebar-accent: 240 4.8% 95.9%;
+		--sidebar-accent-foreground: 240 5.9% 10%;
+		--sidebar-border: 220 13% 91%;
+		--sidebar-ring: 217.2 91.2% 59.8%;
+	}
+	.dark {
+		--background: 0 0% 3.9%;
+		--foreground: 0 0% 98%;
+		--card: 0 0% 3.9%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
+		--primary: 0 0% 98%;
+		--primary-foreground: 0 0% 9%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
+		--destructive: 0 62.8% 30.6%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+		--ring: 0 0% 83.1%;
+		--chart-1: 220 70% 50%;
+		--chart-2: 160 60% 45%;
+		--chart-3: 30 80% 55%;
+		--chart-4: 280 65% 60%;
+		--chart-5: 340 75% 55%;
+		--sidebar-background: 240 5.9% 10%;
+		--sidebar-foreground: 240 4.8% 95.9%;
+		--sidebar-primary: 224.3 76.3% 48%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 240 3.7% 15.9%;
+		--sidebar-accent-foreground: 240 4.8% 95.9%;
+		--sidebar-border: 240 3.7% 15.9%;
+		--sidebar-ring: 217.2 91.2% 59.8%;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+
+:root {
+	--main-color: #cdb485;
+	--dark-color: #212121;
+	--light-color: #383838;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.font-tahoma {
+	font-family: Tahoma, sans-serif;
+}
+
+.rune,
+.jewel {
+	--font-item: Tahoma, sans-serif;
+	--size-m: 16px;
+	--size-s: 15px;
+	--color-border: #815f3f;
+	--color-common-name: #c7c7c7;
+	--color-improved-name: #26e101;
+	--color-magic-name: #0074f5;
+	--color-extraordinary-name: #f216f3;
+	--color-legendary-name: #f66901;
+	--color-unique-name: #f6d313;
+	--color-mythic-name: #922520;
+	--color-info: #afafaf;
+	--color-sub-info: #dbdbdb;
+	--color-effect: #79a3e3;
+
+	font-family: var(--font-item);
+	background-color: var(--color-background);
+	border: 1px solid var(--color-border);
+	border-radius: 5px;
+	font-size: var(--size-m);
+
+	.jewel-info,
+	.rune-info {
+		color: var(--color-info);
+	}
+
+	.jewel-sub-info,
+	.rune-sub-info {
+		color: var(--color-sub-info);
+	}
+
+	.jewel-effect,
+	.rune-effect {
+		color: var(--color-effect);
+	}
+
+	.jewel-name-common,
+	.rune-name-common {
+		color: var(--color-common-name);
+	}
+
+	.jewel-name-improved,
+	.rune-name-improved {
+		color: var(--color-improved-name);
+	}
+
+	.jewel-name-magic,
+	.rune-name-magic {
+		color: var(--color-magic-name);
+	}
+
+	.jewel-name-extraordinary,
+	.rune-name-extraordinary {
+		color: var(--color-extraordinary-name);
+	}
+
+	.jewel-name-legendary,
+	.rune-name-legendary {
+		color: var(--color-legendary-name);
+	}
+
+	.jewel-name-unique,
+	.rune-name-unique {
+		color: var(--color-unique-name);
+	}
+
+	.jewel-name-mythic,
+	.rune-name-mythic {
+		color: var(--color-mythic-name);
+	}
+}
+
+.item {
+	--font-item: Tahoma, sans-serif;
+	--size-l: 20px;
+	--size-m: 16px;
+	--size-s: 15px;
+	--color-border: #815f3f;
+	--color-slot: #aeaeae;
+	--color-level: #c4ad7f;
+	--color-stats-info: #9d9d9d;
+	--color-stats: #e9e9e8;
+	--color-background: #050705bb;
+	/* --color-skill: #a49362;
+	--color-crowd-control: #c7c799;
+	--color-resource: #7d9cb8;
+	--color-side-quest: #a54d0f; */
+	--color-unique-name: #f6d313;
+	--color-unique-label: #c4a813;
+	/* --color-unique-value: #dabb11; */
+	--color-unique-stat: #b28102;
+	--color-set-name: #05a8d3;
+	--color-set-label: #00809e;
+	--color-set-info: #189115;
+	--color-set-value: #77c177;
+	--color-mythic-name: #922520;
+	--color-mythic-label: #69201d;
+
+	font-family: var(--font-item);
+	background-color: var(--color-background);
+	border: 1px solid var(--color-border);
+	border-radius: 5px;
+
+	.slot {
+		font-size: var(--size-m);
+		font-style: italic;
+		color: var(--color-slot);
+	}
+
+	.level {
+		font-size: var(--size-m);
+		color: var(--color-level);
+	}
+
+	.stats-info {
+		font-size: var(--size-s);
+		color: var(--color-stats-info);
+	}
+
+	.stat {
+		font-size: var(--size-m);
+		color: var(--color-stats);
+	}
+
+	/* .skill {
+		color: var(--color-skill);
+	}
+
+	.resource {
+		color: var(--color-resource);
+	}
+
+	.side-quest {
+		color: var(--color-side-quest);
+	} */
+
+	.unique-name {
+		font-size: var(--size-l);
+		color: var(--color-unique-name);
+	}
+
+	.unique-label {
+		font-size: var(--size-m);
+		color: var(--color-unique-label);
+	}
+
+	/* .unique-value {
+		font-size: var(--size-m);
+		color: var(--color-unique-value);
+	} */
+
+	.unique-stat {
+		font-size: var(--size-m);
+		color: var(--color-unique-stat);
+	}
+
+	.set-name {
+		font-size: var(--size-l);
+		color: var(--color-set-name);
+	}
+
+	.set-label {
+		font-size: var(--size-m);
+		color: var(--color-set-label);
+	}
+
+	.set-info {
+		font-size: var(--size-m);
+		color: var(--color-set-info);
+	}
+
+	.set-value {
+		font-size: var(--size-m);
+		color: var(--color-set-value);
+	}
+
+	.mythic-name {
+		font-size: var(--size-l);
+		color: var(--color-mythic-name);
+	}
+
+	.mythic-label {
+		font-size: var(--size-m);
+		color: var(--color-mythic-label);
+	}
+}

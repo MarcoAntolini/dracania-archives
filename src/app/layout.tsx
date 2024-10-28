@@ -1,10 +1,13 @@
-import Footer from "@/app/_components/Footer";
-import Navbar from "@/app/_components/Navbar";
+import Body from "@/components/body";
+import Footer from "@/components/footer";
+import { NavSidebar } from "@/components/nav-sidebar";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import { Toaster } from "sonner";
+import "../../public/styles/globals.css";
+import Providers from "./providers";
 
-const drakenFont = localFont({ src: "./DrakenFont.ttf" });
+const drakenFont = localFont({ src: "../../public/fonts/DrakenFont.ttf" });
 
 export const metadata: Metadata = {
 	title: "Dracania Archives",
@@ -19,10 +22,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<link rel="icon" href="https://dracania-archives.com/favicon.ico" />
 			</head>
-			<body className={`${drakenFont.className} pt-[74px] min-h-screen`}>
-				<Navbar />
-				<main>{children}</main>
-				<Footer />
+			<body
+				className={`${drakenFont.className} dark min-h-screen scroll-smooth bg-custom-background text-white`}
+			>
+				<Providers>
+					<NavSidebar />
+					<div className="flex min-h-screen w-full flex-col">
+						<Body>{children}</Body>
+						<Footer />
+					</div>
+					<Toaster richColors />
+				</Providers>
 			</body>
 		</html>
 	);

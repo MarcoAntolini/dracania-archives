@@ -1,14 +1,13 @@
 "use client";
 
-import Separator from "@/components/Separator";
+import CustomSeparator from "@/components/game/custom-separator";
+import news from "@/data/news";
 import Image from "next/image";
 import Link from "next/link";
-import ActiveCodes from "./_components/codes/ActiveCodes";
-import news from "./changelog/news";
 
 export default function Home() {
 	return (
-		<div className="flex flex-col justify-center items-center">
+		<div className="relative flex flex-col items-center justify-center">
 			<Image
 				src="/images/game/banner.jpg"
 				alt="banner"
@@ -17,44 +16,37 @@ export default function Home() {
 				sizes="100vw"
 				className="mx-auto min-w-full"
 			/>
-			<Separator color="#cdb485" />
-			<h1 className="text-4xl md:text-5xl text-main-color text-center my-6 mx-4">Welcome to Dracania Archives</h1>
-			<div className="flex flex-col lg:flex-row justify-center items-center w-full mb-4 gap-4 md:gap-10 lg:gap-16">
-				<News />
-				<ActiveCodes />
+			<div className="flex w-full max-w-[1200px] flex-col items-center justify-center">
+				<CustomSeparator type="main" />
+				<h1 className="mx-4 my-9 text-center text-4xl text-custom-main md:text-5xl">Welcome to Dracania Archives</h1>
+				<div className="mb-10 w-full max-w-[90%] rounded-lg border border-custom-main p-5 pb-7">
+					<h2 className="text-2xl font-semibold text-custom-main">News</h2>
+					<ol className="relative border-s border-custom-main">
+						{news.slice(0, 3).map((n, _) => (
+							<li key={_} className="my-5 ms-4 overflow-hidden">
+								<div className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-gray-900 bg-custom-main"></div>
+								<time className="mb-1 text-sm font-normal leading-none text-custom-muted">{n.date}</time>
+								<h3 className="text-lg font-semibold text-white">{n.title}</h3>
+								<div className="mb-4 text-base font-normal text-gray-400">
+									<ul className="pl-5">
+										{n.changes.map((c, i) => (
+											<li key={i} className="list-disc py-1">
+												{c}
+											</li>
+										))}
+									</ul>
+								</div>
+							</li>
+						))}
+					</ol>
+					<Link
+						href="/website-news"
+						className="ml-auto mt-4 rounded bg-custom-main px-4 py-2 text-gray-100 transition-all duration-200 ease-in-out hover:bg-custom-main-darker hover:text-white"
+					>
+						Read all
+					</Link>
+				</div>
 			</div>
-		</div>
-	);
-}
-
-function News() {
-	return (
-		<div className="lg:w-[50%] max-w-[90%] border border-main-color rounded-lg p-5 pb-7">
-			<h2 className="text-2xl font-semibold text-main-color">News</h2>
-			<ol className="relative border-s border-main-color">
-				{news.slice(0, 3).map((n, idx) => (
-					<li key={idx} className="my-5 ms-4 overflow-hidden">
-						<div className="absolute w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-gray-900 bg-main-color"></div>
-						<time className="mb-1 text-sm font-normal leading-none text-[#565656]">{n.date}</time>
-						<h3 className="text-lg font-semibold text-white">{n.title}</h3>
-						<div className="mb-4 text-base font-normal text-gray-400">
-							<ul className="pl-5">
-								{n.changes.map((c, i) => (
-									<li key={i} className="list-disc py-1">
-										{c}
-									</li>
-								))}
-							</ul>
-						</div>
-					</li>
-				))}
-			</ol>
-			<Link
-				href="/changelog"
-				className="ml-auto mt-4 bg-main-color text-gray-100 px-4 py-2 rounded hover:bg-[#c4a770] hover:text-white transition-all duration-200 ease-in-out"
-			>
-				Read all
-			</Link>
 		</div>
 	);
 }

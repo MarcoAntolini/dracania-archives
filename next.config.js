@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	assetPrefix: process.env.NODE_ENV === "production" ? "https://dso-database.marcoantolini.com" : "",
+	webpack: (config) => {
+		config.cache = false;
+		return config;
+	},
 	images: {
-		domains: ["dso-database-api.marcoantolini.com"],
+		remotePatterns: [{ protocol: "https", hostname: "api.dracania-archives.com", pathname: "/images/**", port: "" }],
 	},
 };
 
