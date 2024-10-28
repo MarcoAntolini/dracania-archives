@@ -1,6 +1,6 @@
 export const dwarfImages = [
 	"all_ancestral_bgh_ring",
-	"dwarf_ancestral_bgh_banner.png",
+	"dwarf_ancestral_bgh_banner",
 	"all_unique_event_anniversary_amulet",
 	"all_unique_event_winter_ring",
 	"all_set_event_monsterhunt_ring_golden",
@@ -249,7 +249,7 @@ export const dwarfImages = [
 
 export const warriorImages = [
 	"all_ancestral_bgh_ring",
-	"warrior_ancestral_bgh_cape.png",
+	"warrior_ancestral_bgh_cape",
 	"all_unique_event_anniversary_amulet",
 	"all_unique_event_winter_ring",
 	"all_set_event_monsterhunt_ring_golden",
@@ -503,7 +503,7 @@ export const warriorImages = [
 
 export const rangerImages = [
 	"all_ancestral_bgh_ring",
-	"ranger_ancestral_bgh_cape.png",
+	"ranger_ancestral_bgh_cape",
 	"all_unique_event_anniversary_amulet",
 	"all_unique_event_winter_ring",
 	"all_set_event_monsterhunt_ring_golden",
@@ -754,7 +754,7 @@ export const rangerImages = [
 
 export const mageImages = [
 	"all_ancestral_bgh_ring",
-	"mage_ancestral_bgh_cape.png",
+	"mage_ancestral_bgh_cape",
 	"all_unique_event_anniversary_amulet",
 	"all_unique_event_winter_ring",
 	"all_set_event_monsterhunt_ring_golden",
