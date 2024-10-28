@@ -1,7 +1,7 @@
 import type { Prettify } from "ts-hover-prettify";
 import { Classes, Rarities, Slots, StatTypes } from "./consts";
-import type { DwarfImage, MageImage, RangerImage, WarriorImage } from "./images";
 import type { Percentage, String } from "./utilities";
+import type { AllImage } from "./images";
 
 type Class = (typeof Classes)[keyof typeof Classes];
 
@@ -24,35 +24,15 @@ type AdvancedStat = {
 
 type Bonus = AdvancedStat | String;
 
-type WarriorItem = {
-	class: "Dragonknight";
-	image: WarriorImage;
+type BaseItem = {
+	class: Class;
+	image: AllImage;
+	name: string;
+	rarity: Rarity;
+	slot: Slot;
+	level: number;
+	stats: BaseStat[];
 };
-
-type RangerItem = {
-	class: "Ranger";
-	image: RangerImage;
-};
-
-type MageItem = {
-	class: "Spellweaver";
-	image: MageImage;
-};
-
-type DwarfItem = {
-	class: "Steam Mechanicus";
-	image: DwarfImage;
-};
-
-type BaseItem = Prettify<
-	(WarriorItem | RangerItem | MageItem | DwarfItem) & {
-		name: string;
-		rarity: Rarity;
-		slot: Slot;
-		level: number;
-		stats: BaseStat[];
-	}
->;
 
 type ItemSet = {
 	name: string;
@@ -97,16 +77,12 @@ export type {
 	BaseStat,
 	Bonus,
 	Class,
-	DwarfItem,
 	Item,
 	ItemSet,
-	MageItem,
 	MythicItem,
-	RangerItem,
 	Rarity,
 	SetItem,
 	Slot,
 	StatType,
 	UniqueItem,
-	WarriorItem,
 };
