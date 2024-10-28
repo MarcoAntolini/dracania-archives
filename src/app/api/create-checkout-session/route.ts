@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest, res: NextResponse) {
 	const { username } = await req.json();
 	const origin = req.headers.get("origin");
-	const sessionUrl = await createCheckoutSession({ username, origin });
+	const sessionUrl = await createCheckoutSession({ username, origin: origin ?? "" });
 	if (sessionUrl) {
 		return NextResponse.json({ url: sessionUrl }, { status: 200 });
 	} else {
