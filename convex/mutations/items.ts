@@ -1,3 +1,4 @@
+import { Classes } from "@/types/consts";
 import { ConvexError, v } from "convex/values";
 import type { Id } from "../_generated/dataModel";
 import { mutation } from "../_generated/server";
@@ -6,13 +7,12 @@ import { getItemByName } from "../queries/items";
 import { getSetByName } from "../queries/sets";
 import { itemSchema } from "../schema";
 import { setImageNotMissing } from "./images";
-import { Classes } from "@/types/consts";
 
 export const createItem = mutation({
 	args: { ...itemSchema, setName: v.optional(v.string()) },
 	handler: async (ctx, args) => {
 		const item = await getItemByName(ctx, { name: args.name, class: args.class });
-		if (item !== null) {
+		if (item !== undefined) {
 			throw new ConvexError("Item already exists");
 		}
 		const set = args.setName ? await getSetByName(ctx, { setName: args.setName, class: args.class }) : undefined;

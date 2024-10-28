@@ -83,7 +83,7 @@ export default function AddItemsPage() {
 							</div>
 							<Image src="/images/ui/item-separator.png" alt="separator" width={300} height={50} className="m-2" />
 							<div className="flex items-center justify-between">
-								<p className="ml-4 text-center text-xl">{c.name}</p>
+								<p className="ml-4 text-center text-xl text-white">{c.name}</p>
 								<Image
 									src={`/images/classes/${c.commonName}_logo.png`}
 									alt={`${c.commonName}-logo`}
