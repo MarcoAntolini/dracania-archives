@@ -15,7 +15,7 @@ export default function AddItemsPage() {
 	const addedItems = totalItems - missingItems;
 
 	return (
-		<div className="flex max-w-full flex-col items-center px-6 py-10 text-center md:px-10">
+		<div className="flex max-w-full flex-col items-center px-6 py-10 text-center text-gray-400 md:px-10">
 			<h1 className="mb-10 flex items-center justify-center gap-2 text-4xl font-bold text-custom-main">
 				Welcome to the contribute page!
 			</h1>
@@ -23,16 +23,16 @@ export default function AddItemsPage() {
 				Your input plays a crucial role 🛠️ in helping us complete the database that will help every player find all the
 				data they need about any item.
 			</p>
-			<p className="mt-6 font-semibold text-slate-400">
+			<p className="mt-6 font-semibold text-white">
 				🤫 Little spoiler:{" "}
-				<span className="font-normal text-primary">
+				<span className="font-normal text-gray-400">
 					a <span className="font-semibold italic">build calculator tool</span> is already being developed... and the
 					items we add will be used in it!
 				</span>
 			</p>
 			<p className="mt-6">
 				By helping us submit items, you&apos;re not only contributing to the database, but also to the community!{" "}
-				<span className="font-semibold text-slate-400">
+				<span className="font-semibold text-white">
 					And you&apos;ll be credited in the{" "}
 					<Link
 						href="/about"
@@ -56,7 +56,7 @@ export default function AddItemsPage() {
 					</p>
 					<p className="text-lg font-semibold">
 						Items already added:{" "}
-						<span className="font-semibold text-slate-400">{((addedItems / totalItems) * 100).toFixed(2)}%</span>
+						<span className="font-semibold text-white">{((addedItems / totalItems) * 100).toFixed(2)}%</span>
 					</p>
 				</div>
 			) : (
