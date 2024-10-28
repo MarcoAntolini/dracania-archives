@@ -1,5 +1,5 @@
-type Role = "Developer" | "Designer" | "Database Contributor";
+type Role = "Developer" | "Database Contributor" | "Donator" | "New Features Suggestor" | "Tester";
 
-const contributors: { name: string; role: Role | Role[]; github: `https://github.com/users/${string}` }[] = [];
+const contributors: { name: string; role: Role | Role[] }[] = [];
 
 export default contributors;

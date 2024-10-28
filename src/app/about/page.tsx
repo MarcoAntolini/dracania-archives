@@ -1,85 +1,87 @@
 import contributors from "@/data/contributors";
+import Link from "next/link";
 
 export default function About() {
 	return (
-		<div className="mx-3 max-w-screen-xl px-3 pb-[20px] md:mx-auto md:px-4">
-			<h1 className="text-main pt-5 text-center text-2xl font-bold">About the project</h1>
-			<section>
-				<h2 className="text-main mb-2 mt-5 text-xl">What is Dracania Archives?</h2>
+		<div className="flex w-full flex-col items-center gap-10 px-6 py-10 text-gray-500 md:px-10">
+			<h1 className="pt-5 text-center text-2xl font-bold text-custom-main">About the project</h1>
+			<section className="w-full">
+				<h2 className="mb-2 text-xl text-custom-main">What is Dracania Archives?</h2>
 				<p>
-					Dracania Archives is a database of items from the game Drakensang Online, with the goal of expanding the
-					website to include more features and informations about the game.
-					<br />
-					Images, fonts and other assets on this website are property of Bigpoint GmbH.
+					Dracania Archives is a community project for the game{" "}
+					<Link
+						href="https://www.drakensang.com/en"
+						className="text-white underline transition-colors hover:text-custom-main"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Drakensang Online
+					</Link>
+					, with the goal of providing the players with a full database of anything they can find in the game, with the
+					addition of some useful tools.
+				</p>
+				<p>
+					Created and maintained by <span className="text-gray-400">Marco Antolini</span> (known in the community as{" "}
+					<span className="text-gray-400">h4nto</span>), Dracania Archives operates independently and is not affiliated
+					with Bigpoint GmbH or Drakensang Online. 📖
 				</p>
 			</section>
-			<section>
-				<h2 className="text-main mb-2 mt-5 text-xl">Community</h2>
+			<section className="w-full">
+				<h2 className="mb-2 text-xl text-custom-main">Contribution</h2>
 				<p>
-					We have a Discord server where you can discuss about the project, suggest new features and more.
-					<br />
-					You can join the server by clicking{" "}
-					<a
-						href="https://discord.gg/BJ9cdtjBmt"
-						className="hover:text-main underline"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						here
-					</a>
-					.
-					<br />
-					You can also join the discussion section on GitHub by clicking{" "}
-					<a
-						href="https://github.com/MarcoAntolini/dracania-archives/discussions"
-						className="hover:text-main underline"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						here
-					</a>
-					.
-				</p>
-			</section>
-			<section>
-				<h2 className="text-main mb-2 mt-5 text-xl">Contribution</h2>
-				<p>
-					Dracania Archives is an open source project created and maintained by{" "}
-					<a
-						href="https://marcoantolini.com/"
-						className="hover:text-main underline"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Marco Antolini
-					</a>{" "}
-					(known in the community as h4nto) and it is not affiliated with Bigpoint GmbH or Drakensang Online.
-					<br />
-					The source code is available on{" "}
-					<a
-						href="https://github.com/MarcoAntolini/dracania-archives"
-						className="hover:text-main underline"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						GitHub
-					</a>{" "}
-					and you can contribute to the project by opening a pull request or an issue on GitHub.
+					You can contribute to the project in many ways:
+					<ul className="list-inside list-disc">
+						<li>
+							<span className="text-gray-400">Providing Feedback:</span> share your thoughts on our{" "}
+							<Link
+								href="https://discord.com/invite/cRc47h7Drh"
+								className="text-white underline transition-colors hover:text-custom-main"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Discord server
+							</Link>{" "}
+							💬
+						</li>
+						<li>
+							<span className="text-gray-400">Suggesting New Features or Reporting Bugs:</span> use the apposite form in
+							the{" "}
+							<Link href="/feedback" className="text-white underline transition-colors hover:text-custom-main">
+								feedback page
+							</Link>{" "}
+							🐞
+						</li>
+						<li>
+							<span className="text-gray-400">Contributing to the Code:</span> open a pull request on{" "}
+							<Link
+								href="https://github.com/MarcoAntolini/dracania-archives"
+								className="text-white underline transition-colors hover:text-custom-main"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Github
+							</Link>{" "}
+							👨🏼‍💻
+						</li>
+						<li>
+							<span className="text-gray-400">Donating to the Project:</span> support us with a donation to help cover
+							server and domain costs. Your support is deeply appreciated! ❤️{" "}
+							<Link href="/donate" className="text-white underline transition-colors hover:text-custom-main">
+								Donate here!
+							</Link>
+						</li>
+					</ul>
 				</p>
 				<div className="pl-4">
-					<h3 className="text-main mb-1 mt-2 text-lg">Contributors</h3>
+					<h3 className="mb-1 mt-2 text-lg text-custom-main">Contributors</h3>
 					<ul className="list-inside list-disc">
+						<li>
+							Special thanks to <span className="text-gray-400">VelveteenDuck</span> and{" "}
+							<span className="text-gray-400">Voltrifrodec</span>.
+						</li>
 						{contributors.map((contributor) => (
 							<li key={contributor.name}>
-								<a
-									href={contributor.github}
-									className="hover:text-main underline"
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{contributor.name}
-								</a>{" "}
-								(
+								<span className="text-gray-400">{contributor.name}</span> (
 								{Array.isArray(contributor.role)
 									? contributor.role.map((role, i) => (
 											<>
@@ -91,7 +93,6 @@ export default function About() {
 								)
 							</li>
 						))}
-						<li>Special thanks to VelveteenDuck and Voltrifrodec.</li>
 					</ul>
 				</div>
 			</section>

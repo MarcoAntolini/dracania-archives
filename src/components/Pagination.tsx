@@ -1,57 +1,55 @@
-"use client";
-
-import LeftArrow from "./arrowsSvg/LeftArrow";
-import RightArrow from "./arrowsSvg/RightArrow";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+import { Button } from "./ui/button";
 
 export default function Pagination({
 	items,
 	itemsPerPage,
 	currentPage,
 	setCurrentPage,
+	itemsName,
 }: {
 	items: number;
 	itemsPerPage: number;
 	currentPage: number;
-	setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+	setCurrentPage: Dispatch<SetStateAction<number>>;
+	itemsName: string;
 }) {
 	const pages = Math.ceil(items / itemsPerPage);
 
+	const isNextDisabled = currentPage === pages || pages === 0;
+	const isPrevDisabled = currentPage === 1 || pages === 0;
+
 	return (
-		pages > 1 && (
-			<nav aria-label="page navigation" className="mt-6">
-				<ul className="flex h-8 items-center -space-x-px text-sm">
-					<li>
-						<button
-							className={"arrow ms-0 rounded-s-lg border-e-0"}
-							onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-						>
-							<span className="sr-only">Previous</span>
-							<LeftArrow />
-						</button>
-					</li>
-					{Array.from({ length: pages }, (_, i) => (
-						<li key={i}>
-							<button
-								className={`border-dark hover:bg-light flex h-8 items-center justify-center border px-3 leading-tight text-gray-400 hover:text-white
-								${currentPage == i + 1 ? "bg-light text-white" : ""}
-								`}
-								onClick={() => setCurrentPage(i + 1)}
-							>
-								{i + 1}
-							</button>
-						</li>
-					))}
-					<li>
-						<button
-							className={"arrow rounded-e-lg"}
-							onClick={() => setCurrentPage((prev) => Math.min(pages, prev + 1))}
-						>
-							<span className="sr-only">Next</span>
-							<RightArrow />
-						</button>
-					</li>
-				</ul>
-			</nav>
-		)
+		<nav aria-label="page navigation" className="mt-6 flex flex-col gap-2">
+			<ul className="flex h-8 items-center justify-center gap-2 -space-x-px text-sm">
+				<li>
+					<Button
+						variant="outline"
+						onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+						disabled={isPrevDisabled}
+					>
+						<ChevronLeft />
+						<span className="ml-1">Prev</span>
+					</Button>
+				</li>
+				<li>
+					<Button
+						variant="outline"
+						onClick={() => setCurrentPage((prev) => Math.min(pages, prev + 1))}
+						disabled={isNextDisabled}
+					>
+						<span className="mr-1">Next</span>
+						<ChevronRight />
+					</Button>
+				</li>
+			</ul>
+			<div className="flex justify-center pt-2 text-xs text-gray-400" style={{}}>
+				Showing <span className="mx-1 text-custom-main">{items === 0 ? 0 : itemsPerPage * (currentPage - 1) + 1}</span>
+				to <span className="mx-1 text-custom-main">{Math.min(itemsPerPage * currentPage, items)}</span>
+				of <span className="mx-1 text-custom-main">{items}</span>
+				{itemsName}
+			</div>
+		</nav>
 	);
 }

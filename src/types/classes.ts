@@ -3,7 +3,7 @@ import { Classes } from "dso-database";
 export const availableClasses = [
 	{
 		name: Classes.steamMechanicus,
-		commonName: "dwarf",
+		commonName: "steam-mechanicus",
 	},
 	{
 		name: Classes.ranger,
@@ -11,10 +11,10 @@ export const availableClasses = [
 	},
 	{
 		name: Classes.spellweaver,
-		commonName: "mage",
+		commonName: "spellweaver",
 	},
 	{
 		name: Classes.dragonknight,
-		commonName: "warrior",
+		commonName: "dragonknight",
 	},
 ] as const;
