@@ -255,17 +255,19 @@ export default function Page({ params }: { params: { className: string } }) {
 				</Button>
 			</div>
 			<div className="flex w-full flex-col items-center gap-4" ref={ref}>
-				<div
-					className={`mx-auto px-[${padding}px] grid`}
-					style={{
-						gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))`,
-						gridGap: `${itemsGap}px`,
-					}}
-				>
-					{isLoading ? (
-						<ClipLoader className="mt-10 h-10 w-10" color="#cdb485" />
-					) : (
-						filteredItems?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)?.map((item, _) => (
+				{isLoading ? (
+					<ClipLoader className="mt-10 h-10 w-10" color="#cdb485" />
+				) : filteredItems?.length === 0 ? (
+					<span className="w-full text-center italic text-muted-foreground">No items found</span>
+				) : (
+					<div
+						className={`mx-auto px-[${padding}px] grid`}
+						style={{
+							gridTemplateColumns: `repeat(${gridCols}, minmax(0, 1fr))`,
+							gridGap: `${itemsGap}px`,
+						}}
+					>
+						{filteredItems?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)?.map((item, _) => (
 							<Link
 								href={`/items/${params.className}/${item.name}`}
 								key={_}
@@ -284,9 +286,9 @@ export default function Page({ params }: { params: { className: string } }) {
 									{item.name}
 								</span>
 							</Link>
-						))
-					)}
-				</div>
+						))}
+					</div>
+				)}
 				<Pagination
 					items={filteredItems?.length ?? 0}
 					itemsPerPage={itemsPerPage}

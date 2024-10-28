@@ -29,6 +29,15 @@ const changelog: New[] = [
 			"New Donate page. You can now donate to support the project!",
 		],
 	},
+	{
+		title: "Items page rework and some general adjustments",
+		date: "2024-10-28",
+		changes: [
+			"Items page now have new and better filters.",
+			"Some improvements in the About page.",
+			"General asjustments and UI improvements.",
+		],
+	},
 ];
 
 const orderedChangelog = changelog.sort((a, b) => {
