@@ -117,6 +117,12 @@ const donationSchema = {
 const userSchema = {
 	username: v.string(),
 	password: v.string(),
+	token: v.optional(
+		v.object({
+			id: v.string(),
+			expires: v.string(),
+		}),
+	),
 };
 
 export default defineSchema({

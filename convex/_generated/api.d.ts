@@ -18,10 +18,10 @@ import type * as mutations_images from "../mutations/images.js";
 import type * as mutations_items from "../mutations/items.js";
 import type * as mutations_sets from "../mutations/sets.js";
 import type * as mutations_usernames from "../mutations/usernames.js";
+import type * as mutations_users from "../mutations/users.js";
 import type * as queries_images from "../queries/images.js";
 import type * as queries_items from "../queries/items.js";
 import type * as queries_sets from "../queries/sets.js";
-import type * as queries_users from "../queries/users.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -37,10 +37,10 @@ declare const fullApi: ApiFromModules<{
   "mutations/items": typeof mutations_items;
   "mutations/sets": typeof mutations_sets;
   "mutations/usernames": typeof mutations_usernames;
+  "mutations/users": typeof mutations_users;
   "queries/images": typeof queries_images;
   "queries/items": typeof queries_items;
   "queries/sets": typeof queries_sets;
-  "queries/users": typeof queries_users;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
