@@ -44,11 +44,10 @@ export default function Pagination({
 					</Button>
 				</li>
 			</ul>
-			<div className="flex justify-center pt-2 text-xs text-gray-400" style={{}}>
+			<div className="flex justify-center pt-2 text-xs text-gray-400">
 				Showing <span className="mx-1 text-custom-main">{items === 0 ? 0 : itemsPerPage * (currentPage - 1) + 1}</span>
-				to <span className="mx-1 text-custom-main">{Math.min(itemsPerPage * currentPage, items)}</span>
-				of <span className="mx-1 text-custom-main">{items}</span>
-				{itemsName}
+				to <span className="mx-1 text-custom-main">{Math.min(itemsPerPage * currentPage, items)}</span> of
+				<span className="mx-1 text-custom-main">{items}</span> {itemsName}
 			</div>
 		</nav>
 	);

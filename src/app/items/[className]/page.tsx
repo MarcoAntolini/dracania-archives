@@ -1,6 +1,6 @@
 "use client";
 
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/customPagination";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import MultiSelect from "@/components/ui/multi-select";
@@ -158,7 +158,7 @@ export default function Page({ params }: { params: { className: string } }) {
 	return (
 		<div className="flex flex-col gap-10 p-10">
 			<div className={`flex w-full flex-col gap-2 3xl:flex-row px-[${padding}px] items-center justify-center`}>
-				<div className="flex w-full items-center justify-center gap-2 flex-col xl:flex-row">
+				<div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row">
 					<Select value={selectedRarity ?? ""} onValueChange={(value) => setSelectedRarity(value as Rarity)}>
 						<SelectTrigger className="w-full min-w-[200px] max-w-[400px]">
 							<SelectValue
@@ -226,7 +226,7 @@ export default function Page({ params }: { params: { className: string } }) {
 						setSelectedOptions={setSelectedStats}
 					/>
 				</div>
-				<div className="flex w-full items-center justify-center gap-2 flex-col xl:flex-row">
+				<div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row">
 					<Input
 						icon={Search}
 						placeholder="Search by name"

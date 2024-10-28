@@ -1,6 +1,6 @@
 "use client";
 
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/customPagination";
 import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import codes from "@/data/real-time/codes";
