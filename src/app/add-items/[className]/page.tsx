@@ -23,9 +23,9 @@ import {
 	UsernameAlreadyExistsError,
 	usernameAlreadyExistsErrorMessage,
 } from "@/convex/mutations/usernames";
-import { availableClasses } from "@/types/classes";
+import { availableClasses } from "@/types/common/classes";
 import { useMutation } from "convex/react";
-import { type Item, type ItemSet } from "dso-database";
+import { type Item, type ItemSet } from "@/types/items";
 import { RefreshCcwIcon } from "lucide-react";
 import { useCookies } from "next-client-cookies";
 import { useRouter, useSearchParams } from "next/navigation";

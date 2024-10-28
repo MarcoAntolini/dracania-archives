@@ -1,5 +1,4 @@
 import { ConvexError, v } from "convex/values";
-import { Classes } from "dso-database";
 import type { Id } from "../_generated/dataModel";
 import { mutation } from "../_generated/server";
 import { getImage } from "../queries/images";
@@ -7,6 +6,7 @@ import { getItemByName } from "../queries/items";
 import { getSetByName } from "../queries/sets";
 import { itemSchema } from "../schema";
 import { setImageNotMissing } from "./images";
+import { Classes } from "@/types/consts";
 
 export const createItem = mutation({
 	args: { ...itemSchema, setName: v.optional(v.string()) },

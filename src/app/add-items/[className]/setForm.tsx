@@ -9,9 +9,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
+import { StatTypes } from "@/types/consts";
+import { type Class, type ItemSet, type StatType } from "@/types/items";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "convex/react";
-import { type Class, type ItemSet, type StatType, StatTypes } from "dso-database";
 import { Check, ChevronsUpDown, PlusIcon, TrashIcon } from "lucide-react";
 import { useCookies } from "next-client-cookies";
 import { useState } from "react";

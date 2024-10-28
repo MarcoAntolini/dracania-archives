@@ -1,5 +1,6 @@
 import CustomSeparator from "@/components/game/custom-separator";
-import { Rarities, type Bonus, type Item, type ItemSet, type MythicItem, type UniqueItem } from "dso-database";
+import { Rarities } from "@/types/consts";
+import { type Bonus, type Item, type ItemSet, type MythicItem, type UniqueItem } from "@/types/items";
 import Link from "next/link";
 
 export default function EquipItem({ item }: { item: Item }) {

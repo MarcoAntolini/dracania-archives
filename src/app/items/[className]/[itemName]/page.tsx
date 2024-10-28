@@ -2,9 +2,9 @@
 
 import EquipItem from "@/components/game/item";
 import { api } from "@/convex/_generated/api";
-import { availableClasses } from "@/types/classes";
+import { availableClasses } from "@/types/common/classes";
+import type { Item } from "@/types/items";
 import { useQuery } from "convex/react";
-import type { Item } from "dso-database";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

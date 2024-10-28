@@ -1,5 +1,4 @@
-import { Classes } from "dso-database";
-
+import { Classes } from "@/types/consts";
 export const availableClasses = [
 	{
 		name: Classes.steamMechanicus,

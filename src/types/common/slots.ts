@@ -1,4 +1,4 @@
-import { Slots } from "dso-database";
+import { Slots } from "@/types/consts";
 
 export const availableSlots = [
 	{

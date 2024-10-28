@@ -1,4 +1,4 @@
-import type { ItemSet } from "dso-database";
+import type { ItemSet } from "@/types/items";
 import { EquipItemSet } from "./item";
 
 export default function EquipSet({ set }: { set: ItemSet }) {

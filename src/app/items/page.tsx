@@ -1,6 +1,6 @@
 "use client";
 
-import { availableClasses } from "@/types/classes";
+import { availableClasses } from "@/types/common/classes";
 import Image from "next/image";
 import Link from "next/link";
 

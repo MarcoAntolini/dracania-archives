@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { Classes } from "dso-database";
+import { Classes } from "@/types/consts";
 import { query } from "../_generated/server";
 
 export const getSetsByClass = query({

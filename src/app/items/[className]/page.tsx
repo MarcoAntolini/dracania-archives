@@ -6,20 +6,12 @@ import { Input } from "@/components/ui/input";
 import MultiSelect from "@/components/ui/multi-select";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
-import { availableClasses } from "@/types/classes";
-import { availableSlots } from "@/types/slots";
+import { availableClasses } from "@/types/common/classes";
+import { availableSlots } from "@/types/common/slots";
+import { Rarities, StatTypes } from "@/types/consts";
+import { type Item, type Rarity, type SetItem, type Slot, type StatType, type UniqueItem } from "@/types/items";
 import { useMeasure } from "@uidotdev/usehooks";
 import { useQuery } from "convex/react";
-import {
-	Rarities,
-	StatTypes,
-	type Item,
-	type Rarity,
-	type SetItem,
-	type Slot,
-	type StatType,
-	type UniqueItem,
-} from "dso-database";
 import { Filter, RefreshCcw, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

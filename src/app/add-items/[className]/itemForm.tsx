@@ -9,28 +9,23 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
+import { Rarities, Slots, StatTypes } from "@/types/consts";
+import { dwarfImages, mageImages, rangerImages, warriorImages } from "@/types/images";
+import type {
+	BaseStat,
+	Bonus,
+	Class,
+	Item,
+	ItemSet,
+	MythicItem,
+	Rarity,
+	SetItem,
+	Slot,
+	StatType,
+	UniqueItem,
+} from "@/types/items";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "convex/react";
-import {
-	type BaseStat,
-	type Bonus,
-	type Class,
-	type Item,
-	type ItemSet,
-	type MythicItem,
-	Rarities,
-	type Rarity,
-	type SetItem,
-	type Slot,
-	Slots,
-	type StatType,
-	StatTypes,
-	type UniqueItem,
-	dwarfImages,
-	mageImages,
-	rangerImages,
-	warriorImages,
-} from "dso-database";
 import { Check, ChevronsUpDown, PlusIcon, TrashIcon } from "lucide-react";
 import { useCookies } from "next-client-cookies";
 import Image from "next/image";

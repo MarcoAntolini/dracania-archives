@@ -1,6 +1,6 @@
+import { Classes, Rarities, Slots } from "@/types/consts";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
-import { Classes, Rarities, Slots } from "dso-database";
 
 export const setSchema = {
 	class: v.union(
