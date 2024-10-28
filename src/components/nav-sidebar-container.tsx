@@ -67,6 +67,9 @@ export function NavSidebarContainer({
 									asChild
 									tooltip={item.title}
 									onClick={() => {
+										if (item.isCollapsible) {
+											setIsOpen((prev) => ({ ...prev, [index]: !prev[index] }));
+										}
 										toggleSidebarMobile();
 									}}
 									disabled={item.isDisabled}

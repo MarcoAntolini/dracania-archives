@@ -20,7 +20,10 @@ export default function RenderRune({
 					{(rarity === "unique" ? String(rune.effect) : String((rune.effect as RuneEffect)[rarity]))
 						.split("\n")
 						.map((line, index) => (
-							<p key={index} className={line.startsWith("Cooldown") ? "text-[#ff5454]" : ""}>
+							<p
+								key={index}
+								// className={line.startsWith("Cooldown") ? "text-[#ff5454]" : ""}
+							>
 								{line}
 							</p>
 						))}

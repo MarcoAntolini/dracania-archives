@@ -375,19 +375,19 @@ export const runes: (CommonRune | UniqueRune)[] = [
 		image: "/images/db/runes/rune_concentrated_autumn.png",
 	},
 	{
-		name: "Rune of Increasing Power",
+		name: "Rune of Rising Power",
 		type: "unique",
 		effect:
-			"+ 15.00% Armor value\n+ 5.00% Fire resistance\n+ 5.00% Poison resistance\n+ 5.00% Ice resistance\n+ 5.00% Lightning resistance\nWhen you deal critical damage to an enemy, there is a 5% chance to petrify the enemy for 2 seconds.",
+			"+ 15.00% Armor value\n+ 5.00% Fire resistance\n+ 5.00% Poison resistance\n+ 5.00% Ice resistance\n+ 5.00% Lightning resistance\nEach successful critical hit has a chance of 5% to petrify the enemy for 2 seconds.",
 		socketableAmount: 1,
-		image: "/images/db/runes/rune_increasing_power.png",
+		image: "/images/db/runes/rune_rising_power.png",
 	},
 	{
-		name: "Rune of Growing Power",
+		name: "Rune of Rising Vigor",
 		type: "unique",
 		effect:
-			"+ 10.00% movement speed\n+ 6.00% attack speed\nWhen you deal critical damage to an enemy, there is an 8% chance to gain the Phantom Smoke effect, which makes you invulnerable to damage and invisible to monsters for 3 seconds.\nCooldown: 15 seconds",
+			"+ 10.00% movement speed\n+ 6.00% attack speed\nEach successful critical hit has a chance of 8% to trigger the Ghost Smoke effect, making you immune to enemies' skills and invisible to monsters for 3 seconds.\nCooldown: 15 seconds",
 		socketableAmount: 1,
-		image: "/images/db/runes/rune_growing_power.png",
+		image: "/images/db/runes/rune_rising_vigor.png",
 	},
 ];

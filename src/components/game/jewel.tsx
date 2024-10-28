@@ -22,7 +22,10 @@ export default function RenderJewel({
 						? (rarity === "mythic" ? String(jewel.effect) : String((jewel.effect as CommonJewelEffect)[rarity]))
 								.split("\n")
 								.map((line, index) => (
-									<p key={index} className={line.startsWith("Cooldown") ? "text-[#ff5454]" : ""}>
+									<p
+										key={index}
+										// className={line.startsWith("Cooldown") ? "text-[#ff5454]" : ""}
+									>
 										{line}
 									</p>
 								))
