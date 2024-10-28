@@ -64,3 +64,12 @@ export const getApprovedItemByName = query({
 		return item;
 	},
 });
+
+export const getNonApprovedItems = query({
+	handler: async (ctx) => {
+		return await ctx.db
+			.query("items")
+			.filter((q) => q.eq(q.field("approved"), false))
+			.collect();
+	},
+});

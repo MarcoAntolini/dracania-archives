@@ -48,3 +48,15 @@ export const createItem = mutation({
 		return newItemId;
 	},
 });
+
+export const approveItem = mutation({
+	args: { itemId: v.id("items") },
+	handler: async (ctx, args) => {
+		try {
+			await ctx.db.patch(args.itemId, { approved: true });
+			return true;
+		} catch (error) {
+			return false;
+		}
+	},
+});

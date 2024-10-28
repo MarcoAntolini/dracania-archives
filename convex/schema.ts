@@ -114,6 +114,11 @@ const donationSchema = {
 	email: v.optional(v.string()),
 };
 
+const userSchema = {
+	username: v.string(),
+	password: v.string(),
+};
+
 export default defineSchema({
 	items: defineTable(itemSchema),
 	sets: defineTable(setSchema),
@@ -123,4 +128,5 @@ export default defineSchema({
 	rangerImages: defineTable(imageSchema),
 	usernames: defineTable(usernameSchema),
 	donations: defineTable(donationSchema),
+	users: defineTable(userSchema),
 });
