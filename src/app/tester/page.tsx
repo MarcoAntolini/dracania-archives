@@ -119,12 +119,20 @@ export default function TesterPage() {
 						</Select>
 						{selectedItem && (
 							<div className="flex flex-col items-center gap-4">
-								<Image
-									src={`/images/db/items/${selectedItem.image}.png`}
-									alt={selectedItem.name}
-									width={100}
-									height={100}
-								/>
+								<div className="flex items-center justify-center gap-4">
+									<Image
+										src={`/images/db/items/${selectedItem.image}.png`}
+										alt={selectedItem.name}
+										width={100}
+										height={100}
+									/>
+									<Image
+										src={`/images/classes/${selectedItem.class.toLowerCase().replace(" ", "-")}_logo.png`}
+										alt={selectedItem.class}
+										width={100}
+										height={100}
+									/>
+								</div>
 								<EquipItem item={selectedItem} />
 								<Button onClick={async () => await approveItem()}>Approve Item</Button>
 							</div>
