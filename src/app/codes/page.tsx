@@ -61,7 +61,7 @@ export default function CodesPage() {
 
 	return (
 		<PhotoProvider>
-			<div className="flex max-w-full flex-col 6 py-10 md:px-10 4xl:flex-row">
+			<div className="6 flex max-w-full flex-col py-10 md:px-10 4xl:flex-row">
 				<div className="flex flex-col gap-4 4xl:w-1/2">
 					<h2 className="mb-2 px-3 text-2xl text-custom-main">Active Bonus Codes</h2>
 					<Table>
@@ -91,9 +91,9 @@ export default function CodesPage() {
 											{code.expirationDate}
 										</TableCell>
 										<TableCell>
-											<PhotoView src={`/images/db/codes/${code.code}.png`} key={code.code}>
+											<PhotoView src={`/images/db/codes/${code.code.toLowerCase()}.png`} key={code.code}>
 												<Image
-													src={`/images/db/codes/${code.code}.png`}
+													src={`/images/db/codes/${code.code.toLowerCase()}.png`}
 													alt={code.code}
 													width={471}
 													height={250}
@@ -134,9 +134,9 @@ export default function CodesPage() {
 										<TableCell>{code.releaseDate}</TableCell>
 										<TableCell className="text-red-600">{code.expirationDate}</TableCell>
 										<TableCell>
-											<PhotoView src={`/images/db/codes/${code.code}.png`} key={code.code}>
+											<PhotoView src={`/images/db/codes/${code.code.toLowerCase()}.png`} key={code.code}>
 												<Image
-													src={`/images/db/codes/${code.code}.png`}
+													src={`/images/db/codes/${code.code.toLowerCase()}.png`}
 													alt={code.code}
 													width={471}
 													height={250}
