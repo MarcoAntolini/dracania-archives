@@ -82,7 +82,7 @@ export default function CodesPage() {
 										<TableCell
 											className={`${
 												code.daysRemaining <= 1
-													? "text-red-600"
+													? "text-orange-600"
 													: code.daysRemaining <= 3
 														? "text-yellow-600"
 														: "text-green-600"
