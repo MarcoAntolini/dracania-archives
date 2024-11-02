@@ -32,7 +32,7 @@ export default function DonatePage({
 	};
 
 	return (
-		<div className="flex flex-col items-center gap-8 p-5 md:p-10">
+		<div className="flex flex-col items-center gap-8 p-5 text-center md:p-10">
 			<h1 className="text-2xl font-bold text-custom-main">✨ Support the project! ✨</h1>
 			<div className="flex flex-col items-center gap-2 font-light text-gray-400">
 				<p>Your contributions help keep the Dracania Archives alive!</p>
