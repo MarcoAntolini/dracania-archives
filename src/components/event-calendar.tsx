@@ -65,7 +65,7 @@ const EventCalendar = ({ events }: EventCalendarProps) => {
 				<Separator className="my-2" />
 				<div className="flex flex-col gap-2">
 					{todaysEvents.map((event, index) => (
-						<Tooltip key={`${event.title}-${index}`}>
+						<Tooltip key={`${event.title}-${index}`} disableHoverableContent={true} delayDuration={0}>
 							<TooltipTrigger asChild>
 								<div
 									className={`cursor-pointer overflow-hidden text-ellipsis whitespace-nowrap rounded-md px-1`}
