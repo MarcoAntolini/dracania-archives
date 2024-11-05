@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { className: string; itemName
 
 	useEffect(() => {
 		if (queryItem !== undefined && queryItem === null) {
-			router.push("/items");
+			router.replace("/404");
 		} else if (queryItem) {
 			const { _id, _creationTime, approved, contributorUsername, ...newItem } = queryItem;
 			setItem(newItem as Item);

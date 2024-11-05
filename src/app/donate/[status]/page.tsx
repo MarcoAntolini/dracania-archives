@@ -5,7 +5,6 @@ import { useMutation } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { useCookies } from "next-client-cookies";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function DonationSuccessPage({
@@ -15,36 +14,33 @@ export default function DonationSuccessPage({
 	params: { status: string };
 	searchParams: { sessionId: string };
 }) {
-	const paymentStatus = params.status;
+	const status = params.status;
 	const sessionId = searchParams.sessionId;
 
-	const router = useRouter();
 	const cookies = useCookies();
-
-	if (paymentStatus !== "success" && paymentStatus !== "canceled") {
-		router.push("/donate");
-	}
 
 	const addDonation = useMutation(api.mutations.donations.addDonation);
 
 	const [isLoading, setIsLoading] = useState(true);
+	const [paymentStatus, setPaymentStatus] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
 		const verifyPayment = async () => {
 			const emailSent = cookies.get(`emailSent_${sessionId}`);
-			if (paymentStatus !== undefined && sessionId !== undefined && emailSent !== "true") {
+			if (status !== undefined && sessionId !== undefined && emailSent !== "true") {
 				await fetch("/api/verify-payment", {
 					method: "POST",
 					body: JSON.stringify({ sessionId }),
 				})
 					.then((res) => res.json())
-					.then(async (session) => {
-						if (session.payment_status === "paid" && paymentStatus === "success") {
+					.then(async (payment) => {
+						if (payment.payment_status === "paid" && status === "success") {
 							setIsLoading(false);
+							setPaymentStatus("success");
 							await addDonation({
 								donationId: sessionId,
-								username: session.username,
-								email: session.email,
+								username: payment.username,
+								email: payment.email,
 							});
 							await fetch("/api/send-payment-email", {
 								method: "POST",
@@ -54,13 +50,14 @@ export default function DonationSuccessPage({
 							});
 						} else {
 							setIsLoading(false);
+							setPaymentStatus("canceled");
 						}
 					});
 			}
 		};
 		verifyPayment();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [paymentStatus, sessionId]);
+	}, [status, sessionId]);
 
 	return (
 		<div className="flex w-full flex-col items-center justify-center">

@@ -1,6 +1,7 @@
 import Body from "@/components/body";
 import Footer from "@/components/footer";
 import { NavSidebar } from "@/components/nav-sidebar";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
@@ -22,10 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<link rel="icon" href="https://dracania-archives.com/favicon.ico" />
 			</head>
-			<body
-				className={`${drakenFont.className} dark min-h-screen scroll-smooth bg-custom-background text-white`}
-			>
+			<body className={`${drakenFont.className} dark min-h-screen scroll-smooth bg-custom-background text-white`}>
 				<Providers>
+					<Analytics />
 					<NavSidebar />
 					<div className="flex min-h-screen w-full flex-col">
 						<Body>{children}</Body>

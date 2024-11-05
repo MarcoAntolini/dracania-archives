@@ -8,11 +8,7 @@ import { toast } from "sonner";
 
 loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
-export default function DonatePage({
-	searchParams,
-}: {
-	searchParams: { status: "success" | "canceled"; sessionId: string };
-}) {
+export default function DonatePage() {
 	const router = useRouter();
 	const cookies = useCookies();
 
