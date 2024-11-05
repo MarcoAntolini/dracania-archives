@@ -14,17 +14,12 @@ import { useMeasure } from "@uidotdev/usehooks";
 import { useQuery } from "convex/react";
 import { Filter, RefreshCcw, Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { parseAsArrayOf, parseAsString, parseAsStringLiteral, useQueryState } from "nuqs";
 import { useEffect, useMemo, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
 export default function Page({ params }: { params: { className: string } }) {
-	const router = useRouter();
-
 	const selectedClass = availableClasses.find((c) => c.commonName === params.className)?.name;
-	if (!selectedClass) {
-		router.push("/items");
-	}
 
 	const items = useQuery(api.queries.items.getApprovedItemsByClass, { class: selectedClass! });
 
@@ -59,12 +54,15 @@ export default function Page({ params }: { params: { className: string } }) {
 		}
 	}, [items]);
 
-	const [selectedRarity, setSelectedRarity] = useState<Rarity | undefined>(undefined);
-	const [selectedSlot, setSelectedSlot] = useState<Slot | Slot[] | undefined>(undefined);
-	const [selectedStats, setSelectedStats] = useState<StatType[]>([]);
-	const [selectedName, setSelectedName] = useState<string>("");
-	const [selectedEffect, setSelectedEffect] = useState<string>("");
-	const [selectedSetName, setSelectedSetName] = useState<string>("");
+	const [selectedRarity, setSelectedRarity] = useQueryState("rarity", parseAsStringLiteral(Object.values(Rarities)));
+	const [selectedSlot, setSelectedSlot] = useQueryState("slot", parseAsString);
+	const [selectedStats, setSelectedStats] = useQueryState(
+		"stats",
+		parseAsArrayOf(parseAsStringLiteral(Object.values(StatTypes))),
+	);
+	const [selectedName, setSelectedName] = useQueryState("name", parseAsString.withDefault(""));
+	const [selectedEffect, setSelectedEffect] = useQueryState("effect", parseAsString.withDefault(""));
+	const [selectedSetName, setSelectedSetName] = useQueryState("set", parseAsString.withDefault(""));
 
 	const filterRarity = (item: Item) => {
 		if (!selectedRarity) return true;
@@ -72,21 +70,16 @@ export default function Page({ params }: { params: { className: string } }) {
 	};
 	const filterSlot = (item: Item) => {
 		if (!selectedSlot) return true;
-		if (typeof selectedSlot === "string") return item.slot === selectedSlot;
-		else return selectedSlot.includes(item.slot);
+		const selectedSlotValue = availableSlots.find((slot) => selectedSlot === slot.commonName)?.itemSlot as
+			| Slot
+			| Slot[]
+			| undefined;
+		if (typeof selectedSlotValue === "string") return selectedSlotValue === item.slot;
+		return selectedSlotValue?.includes(item.slot);
 	};
 	const filterStats = (item: Item) => {
 		if (!selectedStats || selectedStats.length === 0) return true;
 		if (selectedStats.every((sStat) => item.stats.some((itemStat) => itemStat.stat === sStat))) return true;
-		if (
-			["Mythic Item", "Set Item"].includes(item.rarity) &&
-			selectedStats.every((sStat) =>
-				(item as SetItem).set?.setBonus.some(
-					(setBonus) => typeof setBonus.bonus === "object" && setBonus.bonus.stat === sStat,
-				),
-			)
-		)
-			return true;
 		if (
 			["Mythic Item", "Set Item"].includes(item.rarity) &&
 			selectedStats.every((sStat) =>
@@ -114,7 +107,7 @@ export default function Page({ params }: { params: { className: string } }) {
 				if (typeof setBonus.bonus === "string") {
 					return setBonus.bonus.toLowerCase().includes(selectedEffect.toLowerCase());
 				} else {
-					return selectedStats.includes(setBonus.bonus.stat);
+					return selectedStats?.includes(setBonus.bonus.stat);
 				}
 			});
 		}
@@ -139,19 +132,19 @@ export default function Page({ params }: { params: { className: string } }) {
 	}, [items, selectedRarity, selectedSlot, selectedStats, selectedName, selectedEffect, selectedSetName]);
 
 	const resetFilters = () => {
-		setSelectedRarity(undefined);
-		setSelectedSlot(undefined);
-		setSelectedStats([]);
-		setSelectedName("");
-		setSelectedEffect("");
-		setSelectedSetName("");
+		setSelectedRarity(null);
+		setSelectedSlot(null);
+		setSelectedStats(null);
+		setSelectedName(null);
+		setSelectedEffect(null);
+		setSelectedSetName(null);
 	};
 
 	return (
 		<div className="flex flex-col gap-10 p-10">
 			<div className={`flex w-full flex-col gap-2 3xl:flex-row px-[${padding}px] items-center justify-center`}>
 				<div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row">
-					<Select value={selectedRarity ?? ""} onValueChange={(value) => setSelectedRarity(value as Rarity)}>
+					<Select value={selectedRarity ?? ""} onValueChange={(value) => setSelectedRarity((value as Rarity) || null)}>
 						<SelectTrigger className="w-full min-w-[200px] max-w-[400px]">
 							<SelectValue
 								placeholder={
@@ -175,10 +168,7 @@ export default function Page({ params }: { params: { className: string } }) {
 							))}
 						</SelectContent>
 					</Select>
-					<Select
-						value={selectedSlot ? (typeof selectedSlot === "string" ? selectedSlot : selectedSlot.join(", ")) : ""}
-						onValueChange={(value) => setSelectedSlot(value as Slot | Slot[])}
-					>
+					<Select value={selectedSlot ?? ""} onValueChange={(value) => setSelectedSlot(value || null)}>
 						<SelectTrigger className="w-full min-w-[200px] max-w-[400px]">
 							<SelectValue
 								placeholder={
@@ -196,10 +186,7 @@ export default function Page({ params }: { params: { className: string } }) {
 						</SelectTrigger>
 						<SelectContent>
 							{availableSlots.map((slot) => (
-								<SelectItem
-									key={slot.commonName}
-									value={typeof slot.itemSlot === "string" ? slot.itemSlot : slot.itemSlot.join(", ")}
-								>
+								<SelectItem key={slot.commonName} value={slot.commonName}>
 									{slot.commonName}
 								</SelectItem>
 							))}
@@ -215,29 +202,29 @@ export default function Page({ params }: { params: { className: string } }) {
 						}
 						options={Object.values(StatTypes).map((stat) => ({ label: stat, value: stat }))}
 						selectedOptions={selectedStats ?? []}
-						setSelectedOptions={setSelectedStats}
+						setSelectedOptions={(options) => setSelectedStats(options.length ? (options as StatType[]) : null)}
 					/>
 				</div>
 				<div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row">
 					<Input
 						icon={Search}
 						placeholder="Search by name"
-						value={selectedName}
-						onChange={(e) => setSelectedName(e.target.value)}
+						value={selectedName ?? ""}
+						onChange={(e) => setSelectedName(e.target.value || null)}
 						className="min-w-[210px] max-w-[400px]"
 					/>
 					<Input
 						icon={Search}
 						placeholder="Search by effect"
-						value={selectedEffect}
-						onChange={(e) => setSelectedEffect(e.target.value)}
+						value={selectedEffect ?? ""}
+						onChange={(e) => setSelectedEffect(e.target.value || null)}
 						className="min-w-[210px] max-w-[400px]"
 					/>
 					<Input
 						icon={Search}
 						placeholder="Search by set name"
-						value={selectedSetName}
-						onChange={(e) => setSelectedSetName(e.target.value)}
+						value={selectedSetName ?? ""}
+						onChange={(e) => setSelectedSetName(e.target.value || null)}
 						className="min-w-[210px] max-w-[400px]"
 					/>
 				</div>

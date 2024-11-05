@@ -33,7 +33,9 @@ const MultiSelect = <V,>({
 }: ISelectProps<V>) => {
 	const handleSelectChange = (value: V) => {
 		if (!selectedItems.includes(value)) {
-			setSelectedItems((prev) => [...prev, value]);
+			const previousItems = [...selectedItems];
+			previousItems.push(value);
+			setSelectedItems(previousItems);
 		} else {
 			const referencedArray = [...selectedItems];
 			const indexOfItemToBeRemoved = referencedArray.indexOf(value);
