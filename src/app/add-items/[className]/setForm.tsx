@@ -148,10 +148,10 @@ export default function SetForm({
 			});
 			clearSetForm();
 			toast.success("Set created successfully");
-			fetch("/api/send-contribution-email", {
-				method: "POST",
-				body: JSON.stringify({ type: "set", class: classValue, name: values.name }),
-			});
+			// fetch("/api/send-contribution-email", {
+			// 	method: "POST",
+			// 	body: JSON.stringify({ type: "set", class: classValue, name: values.name }),
+			// });
 			console.log("Form submitted with values:", values);
 		} catch (error) {
 			console.error("Error in form submission:", error);

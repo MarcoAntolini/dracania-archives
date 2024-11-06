@@ -13,6 +13,8 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as actions_items from "../actions/items.js";
+import type * as crons from "../crons.js";
 import type * as mutations_donations from "../mutations/donations.js";
 import type * as mutations_images from "../mutations/images.js";
 import type * as mutations_items from "../mutations/items.js";
@@ -32,6 +34,8 @@ import type * as queries_sets from "../queries/sets.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "actions/items": typeof actions_items;
+  crons: typeof crons;
   "mutations/donations": typeof mutations_donations;
   "mutations/images": typeof mutations_images;
   "mutations/items": typeof mutations_items;

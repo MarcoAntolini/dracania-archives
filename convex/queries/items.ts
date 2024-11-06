@@ -1,6 +1,6 @@
 import { Classes } from "@/types/consts";
 import { v } from "convex/values";
-import { query } from "../_generated/server";
+import { internalQuery, query } from "../_generated/server";
 
 export const getItemsByClass = query({
 	args: {
@@ -70,6 +70,17 @@ export const getNonApprovedItems = query({
 		return await ctx.db
 			.query("items")
 			.filter((q) => q.eq(q.field("approved"), false))
+			.collect();
+	},
+});
+
+export const getNewlyAddedItems = internalQuery({
+	args: {},
+	handler: async (ctx) => {
+		return await ctx.db
+			.query("items")
+			.filter((q) => q.eq(q.field("approved"), false))
+			.filter((q) => q.lt(q.field("_creationTime"), new Date(Date.now() - 1 * 60 * 60 * 1000).getTime()))
 			.collect();
 	},
 });

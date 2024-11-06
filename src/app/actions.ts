@@ -1,3 +1,4 @@
+import type { Item } from "@/types/items";
 import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 import Stripe from "stripe";
 
@@ -13,6 +14,17 @@ export const sendFeedbackEmail = async ({ feedback, email }: { feedback: string;
 		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
 		.setSubject(`New Feedback from ${email ?? "Anonymous"}`)
 		.setText(feedback);
+	await mailerSend.email.send(emailParams);
+};
+
+export const sendHourlyContributionEmail = async ({ items }: { items: Item[] }) => {
+	const emailParams = new EmailParams()
+		.setFrom(new Sender("contributor@dracania-archives.com", "Dracania Archives Feedback"))
+		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
+		.setSubject(`New items awaiting approval`).setText(`
+			There are ${items.length} new items awaiting approval:
+			${items.map((item) => `- ${item.name} (${item.class})`).join("\n")}
+		`);
 	await mailerSend.email.send(emailParams);
 };
 

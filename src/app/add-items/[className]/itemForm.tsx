@@ -265,10 +265,10 @@ export default function ItemForm({
 			});
 			clearItemForm();
 			toast.success("Item created successfully");
-			fetch("/api/send-contribution-email", {
-				method: "POST",
-				body: JSON.stringify({ type: "item", class: classValue, name: values.name }),
-			});
+			// fetch("/api/send-contribution-email", {
+			// 	method: "POST",
+			// 	body: JSON.stringify({ type: "item", class: classValue, name: values.name }),
+			// });
 			console.log("Form submitted with values:", values);
 		} catch (error) {
 			console.error("Error in form submission:", error);
