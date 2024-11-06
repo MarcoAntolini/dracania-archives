@@ -142,8 +142,8 @@ export default function Page({ params }: { params: { className: string } }) {
 
 	return (
 		<div className="flex flex-col gap-10 p-4 sm:p-6 lg:p-10">
-			<div className="flex w-full flex-col gap-4">
-				<div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+			<div className="flex w-full flex-col gap-2 4xl:flex-row">
+				<div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 4xl:grid-cols-6">
 					<Select value={selectedRarity ?? ""} onValueChange={(value) => setSelectedRarity((value as Rarity) || null)}>
 						<SelectTrigger className="w-full">
 							<SelectValue

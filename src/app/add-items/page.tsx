@@ -65,7 +65,7 @@ export default function AddItemsPage() {
 			<CustomSeparator type="main" className="my-10 max-w-[1400px]" />
 			<div className="flex flex-col items-center gap-4">
 				<h2 className="text-2xl font-semibold text-custom-main">Select the class</h2>
-				<div className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-4">
+				<div className="grid grid-cols-1 lg:grid-cols-2 3xl:grid-cols-4">
 					{availableClasses.map((c) => (
 						<Link
 							key={c.name}
