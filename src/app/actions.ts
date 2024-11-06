@@ -19,7 +19,7 @@ export const sendFeedbackEmail = async ({ feedback, email }: { feedback: string;
 
 export const sendHourlyContributionEmail = async ({ items }: { items: Item[] }) => {
 	const emailParams = new EmailParams()
-		.setFrom(new Sender("contributor@dracania-archives.com", "Dracania Archives Feedback"))
+		.setFrom(new Sender("contributor@dracania-archives.com", "Dracania Archives Contributor"))
 		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
 		.setSubject(`New items awaiting approval`).setText(`
 			There are ${items.length} new items awaiting approval:
