@@ -389,7 +389,7 @@ export default function ItemForm({
 									<FormItem className="col-span-3">
 										<FormControl>
 											<Select {...field} onValueChange={(value) => field.onChange(value as Rarity)}>
-												<SelectTrigger>
+												<SelectTrigger className={`${!field.value && "text-muted-foreground"}`}>
 													<SelectValue placeholder="Select rarity" />
 												</SelectTrigger>
 												<SelectContent>

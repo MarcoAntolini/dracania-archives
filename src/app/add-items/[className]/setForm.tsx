@@ -89,6 +89,15 @@ export default function SetForm({
 
 	const [setBonusTypes, setSetBonusTypes] = useState<("stat" | "special bonus")[]>([]);
 
+	function removeSetBonus(index: number) {
+		setBonusRemove(index);
+		setSetBonusTypes((prev) => {
+			const newTypes = [...prev];
+			newTypes.splice(index, 1);
+			return newTypes;
+		});
+	}
+
 	const [statsPopoverOpen, setStatsPopoverOpen] = useState<boolean[]>([]);
 
 	const createSet = useMutation(api.mutations.sets.createSet);
@@ -218,7 +227,7 @@ export default function SetForm({
 											<Card key={field.id}>
 												<CardHeader className="flex flex-row items-center justify-between space-y-0 p-2 pb-0">
 													<CardTitle className="pl-2 text-sm font-medium">Set bonus {index + 1}</CardTitle>
-													<Button type="button" variant="destructive" size="sm" onClick={() => setBonusRemove(index)}>
+													<Button type="button" variant="destructive" size="sm" onClick={() => removeSetBonus(index)}>
 														<TrashIcon className="h-4 w-4" />
 													</Button>
 												</CardHeader>
@@ -236,7 +245,7 @@ export default function SetForm({
 																				onValueChange={(value) => field.onChange(Number(value))}
 																				value={field.value === 0 ? undefined : field.value?.toString()}
 																			>
-																				<SelectTrigger>
+																				<SelectTrigger className={`${!field.value && "text-muted-foreground"}`}>
 																					<SelectValue placeholder="Required items" />
 																				</SelectTrigger>
 																				<SelectContent>
@@ -261,7 +270,7 @@ export default function SetForm({
 																})
 															}
 														>
-															<SelectTrigger>
+															<SelectTrigger className={`${!setBonusTypes[index] && "text-muted-foreground"}`}>
 																<SelectValue placeholder="Bonus type" />
 															</SelectTrigger>
 															<SelectContent>
