@@ -1,3 +1,5 @@
+"use node";
+
 import { sendHourlyContributionEmail } from "@/app/actions";
 import type { Item } from "@/types/items";
 import { internal } from "../_generated/api";
