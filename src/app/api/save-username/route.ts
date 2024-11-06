@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
 	let ipAddress = req.headers.get("x-real-ip") as string;
 	const forwardedFor = req.headers.get("x-forwarded-for") as string;
 	if (!ipAddress && forwardedFor) {

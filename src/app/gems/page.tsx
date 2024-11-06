@@ -82,26 +82,26 @@ export default function GemsPage() {
 							</CardHeader>
 							<CardContent className="flex flex-wrap gap-4">
 								{GemRarities.map((gemRarity) => (
-									<TooltipProvider>
+									<TooltipProvider
+										key={
+											(gemType.includes(" ") ? gemType.split(" ")[1].replace(/[() ]/g, "").slice(0, 3) : gemType) +
+											(gemRarity === ""
+												? gemRarity + "_"
+												: gemRarity.includes(" ")
+													? gemRarity
+															.split(" ")
+															.map((word) => word.slice(0, 3))
+															.join("")
+													: gemRarity.slice(0, 5))
+										}
+									>
 										<Tooltip
 											delayDuration={0}
 											open={tooltipOpen[gemType + gemRarity]?.[0]}
 											onOpenChange={(open) => toggleTooltip(gemType + gemRarity, 0, open)}
 											disableHoverableContent
 										>
-											<TooltipTrigger
-												key={
-													(gemType.includes(" ") ? gemType.split(" ")[1].replace(/[() ]/g, "").slice(0, 3) : gemType) +
-													(gemRarity === ""
-														? gemRarity + "_"
-														: gemRarity.includes(" ")
-															? gemRarity
-																	.split(" ")
-																	.map((word) => word.slice(0, 3))
-																	.join("")
-															: gemRarity.slice(0, 5))
-												}
-											>
+											<TooltipTrigger>
 												<div className="relative h-[100px] w-[100px]">
 													<Image
 														src="/images/ui/bg_rarity_common.png"
