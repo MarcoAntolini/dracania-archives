@@ -1,6 +1,10 @@
-type Role = "Developer" | "Database Contributor" | "Donator" | "Idea Generator" | "Beta Tester";
+type Role = "Developer" | "Database Contributor" | "Donator" | "Idea Contributor" | "Beta Tester";
 
 const contributors: { name: string; role: Role | Role[] }[] = [
+	{
+		name: "Cosmaz",
+		role: ["Beta Tester", "Idea Contributor"],
+	},
 	{
 		name: "Cezara",
 		role: "Database Contributor",
@@ -8,6 +12,14 @@ const contributors: { name: string; role: Role | Role[] }[] = [
 	{
 		name: "Shiver",
 		role: "Database Contributor",
+	},
+	{
+		name: "Raventz",
+		role: "Idea Contributor",
+	},
+	{
+		name: "TheSlifer",
+		role: "Idea Contributor",
 	},
 ];
 
