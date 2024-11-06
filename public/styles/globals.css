@@ -104,7 +104,8 @@ input[type="number"] {
 }
 
 .rune,
-.jewel {
+.jewel,
+.gem {
 	--font-item: Tahoma, sans-serif;
 	--size-m: 16px;
 	--size-s: 15px;
@@ -127,22 +128,26 @@ input[type="number"] {
 	font-size: var(--size-m);
 
 	.jewel-info,
-	.rune-info {
+	.rune-info,
+	.gem-info {
 		color: var(--color-info);
 	}
 
 	.jewel-sub-info,
-	.rune-sub-info {
+	.rune-sub-info,
+	.gem-sub-info {
 		color: var(--color-sub-info);
 	}
 
 	.jewel-effect,
-	.rune-effect {
+	.rune-effect,
+	.gem-effect {
 		color: var(--color-effect);
 	}
 
 	.jewel-name-common,
-	.rune-name-common {
+	.rune-name-common,
+	.gem-name {
 		color: var(--color-common-name);
 	}
 

@@ -62,4 +62,39 @@ const StatTypes = {
 	andermagicResistance: "Andermagic Resistance",
 } as const;
 
-export { Classes, Rarities, Slots, StatTypes };
+const GemRarities = [
+	"Flawed",
+	"Splintered",
+	"Simple",
+	"",
+	"Polished",
+	"Radiant",
+	"Flawless",
+	"Sacred",
+	"Royal",
+	"Trapezoid",
+	"Refined Trapezoid",
+	"Brilliant Trapezoid",
+	"Exquisite Trapezoid",
+	"Imperial",
+	"Refined Imperial",
+	"Brilliant Imperial",
+	"Exquisite Imperial",
+] as const;
+
+const GemTypes = {
+	offensive: ["Ruby", "Onyx", "Zircon", "Rhodolite"],
+	defensive: [
+		"Amethyst",
+		"Emerald",
+		"Cyanite",
+		"Diamond",
+		"Diamond (Fire)",
+		"Diamond (Ice)",
+		"Diamond (Lightning)",
+		"Diamond (Poison)",
+		"Diamond (Andermagic)",
+	],
+} as const;
+
+export { Classes, GemRarities, GemTypes, Rarities, Slots, StatTypes };

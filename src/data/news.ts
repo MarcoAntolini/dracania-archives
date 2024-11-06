@@ -38,6 +38,14 @@ const changelog: New[] = [
 			"General asjustments and UI improvements.",
 		],
 	},
+	{
+		title: "New Gems page",
+		date: "2024-11-06",
+		changes: [
+			"New Gems page: all gems added to the database.",
+			"Opals database and gems related calculators are being worked on...",
+		],
+	},
 ];
 
 const orderedChangelog = changelog.sort((a, b) => {

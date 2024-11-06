@@ -49,6 +49,11 @@ export const sidebarData = {
 			],
 		},
 		{
+			title: "Gems",
+			url: "/gems",
+			image: "/images/icons/gem.png",
+		},
+		{
 			title: "Runes",
 			url: "/runes",
 			image: "/images/icons/rune.png",
