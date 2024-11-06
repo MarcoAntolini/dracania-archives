@@ -80,7 +80,7 @@ export const getNewlyAddedItems = internalQuery({
 		return await ctx.db
 			.query("items")
 			.filter((q) => q.eq(q.field("approved"), false))
-			.filter((q) => q.lt(q.field("_creationTime"), new Date(Date.now() - 1 * 60 * 60 * 1000).getTime()))
+			.filter((q) => q.gt(q.field("_creationTime"), new Date(Date.now() - 1 * 60 * 60 * 1000).getTime()))
 			.collect();
 	},
 });
