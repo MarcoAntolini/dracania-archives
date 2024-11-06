@@ -141,11 +141,11 @@ export default function Page({ params }: { params: { className: string } }) {
 	};
 
 	return (
-		<div className="flex flex-col gap-10 p-10">
-			<div className={`flex w-full flex-col gap-2 3xl:flex-row px-[${padding}px] items-center justify-center`}>
-				<div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row">
+		<div className="flex flex-col gap-10 p-4 sm:p-6 lg:p-10">
+			<div className="flex w-full flex-col gap-4">
+				<div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
 					<Select value={selectedRarity ?? ""} onValueChange={(value) => setSelectedRarity((value as Rarity) || null)}>
-						<SelectTrigger className="w-full min-w-[200px] max-w-[400px]">
+						<SelectTrigger className="w-full">
 							<SelectValue
 								placeholder={
 									<span className="flex items-center text-muted-foreground">
@@ -169,7 +169,7 @@ export default function Page({ params }: { params: { className: string } }) {
 						</SelectContent>
 					</Select>
 					<Select value={selectedSlot ?? ""} onValueChange={(value) => setSelectedSlot(value || null)}>
-						<SelectTrigger className="w-full min-w-[200px] max-w-[400px]">
+						<SelectTrigger className="w-full">
 							<SelectValue
 								placeholder={
 									<span className="flex items-center text-muted-foreground">
@@ -200,37 +200,35 @@ export default function Page({ params }: { params: { className: string } }) {
 								Select one or more stats
 							</span>
 						}
-						options={Object.values(StatTypes).map((stat) => ({ label: stat, value: stat }))}
+						options={Object.values(StatTypes).map((stat) => ({
+							label: stat,
+							value: stat,
+						}))}
 						selectedOptions={selectedStats ?? []}
 						setSelectedOptions={(options) => setSelectedStats(options.length ? (options as StatType[]) : null)}
 					/>
-				</div>
-				<div className="flex w-full flex-col items-center justify-center gap-2 xl:flex-row">
 					<Input
 						icon={Search}
 						placeholder="Search by name"
 						value={selectedName ?? ""}
 						onChange={(e) => setSelectedName(e.target.value || null)}
-						className="min-w-[210px] max-w-[400px]"
 					/>
 					<Input
 						icon={Search}
 						placeholder="Search by effect"
 						value={selectedEffect ?? ""}
 						onChange={(e) => setSelectedEffect(e.target.value || null)}
-						className="min-w-[210px] max-w-[400px]"
 					/>
 					<Input
 						icon={Search}
 						placeholder="Search by set name"
 						value={selectedSetName ?? ""}
 						onChange={(e) => setSelectedSetName(e.target.value || null)}
-						className="min-w-[210px] max-w-[400px]"
 					/>
 				</div>
-				<Button onClick={resetFilters} variant="destructive">
+				<Button onClick={resetFilters} variant="destructive" className="h-10 w-fit">
 					Reset
-					<RefreshCcw className="h-4 w-4" />
+					<RefreshCcw className="ml-2 h-4 w-4" />
 				</Button>
 			</div>
 			<div className="flex w-full flex-col items-center gap-4" ref={ref}>

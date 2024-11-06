@@ -54,48 +54,45 @@ const MultiSelect = <V,>({
 	const Icon = icon;
 
 	const isOptionSelected = (value: V): boolean => {
-		return selectedItems.includes(value) ? true : false;
+		return selectedItems.includes(value);
 	};
 
 	return (
-		<>
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild className="min-w-[300px] max-w-[400px]">
-					<Button variant="outline" className="flex w-full items-center justify-between" ref={ref}>
-						<div className={`${selectedItems.length > 0 ? "text-foreground" : "text-muted-foreground"} w-full`}>
-							<span className={cn("flex min-w-[250px] max-w-[350px] items-center", className)}>
-								{icon && selectedItems.length > 0 && <Icon className="mr-2 h-4 w-4" />}
-								<span className="overflow-hidden text-ellipsis whitespace-nowrap">
-									{selectedItems.length > 3
-										? `${selectedItems.slice(0, 2).join(", ")} and ${selectedItems.length - 2} more`
-										: selectedItems.length > 0
-											? selectedItems.join(", ")
-											: placeholder}
-								</span>
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<Button variant="outline" className="flex w-full items-center justify-between" ref={ref}>
+					<div className={`${selectedItems.length > 0 ? "text-foreground" : "text-muted-foreground"} w-full truncate`}>
+						<span className={cn("flex items-center", className)}>
+							{icon && selectedItems.length > 0 && <Icon className="mr-2 h-4 w-4 flex-shrink-0" />}
+							<span className="truncate">
+								{selectedItems.length > 3
+									? `${selectedItems.slice(0, 2).join(", ")} and ${selectedItems.length - 2} more`
+									: selectedItems.length > 0
+										? selectedItems.join(", ")
+										: placeholder}
 							</span>
-						</div>
-						<ChevronDown className="h-4 w-4 opacity-50" />
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent
-					className={`max-h-[--radix-dropdown-content-available-height] w-[${dropdownWidth}px]`}
-					onCloseAutoFocus={(e) => e.preventDefault()}
-				>
-					{values.map((value: Option<V>, index: number) => {
-						return (
-							<DropdownMenuCheckboxItem
-								onSelect={(e) => e.preventDefault()}
-								key={index}
-								checked={isOptionSelected(value.value)}
-								onCheckedChange={() => handleSelectChange(value.value)}
-							>
-								{value.label}
-							</DropdownMenuCheckboxItem>
-						);
-					})}
-				</DropdownMenuContent>
-			</DropdownMenu>
-		</>
+						</span>
+					</div>
+					<ChevronDown className="ml-2 h-4 w-4 flex-shrink-0 opacity-50" />
+				</Button>
+			</DropdownMenuTrigger>
+			<DropdownMenuContent
+				className="max-h-[300px] overflow-y-auto"
+				style={{ width: `${dropdownWidth}px` }}
+				onCloseAutoFocus={(e) => e.preventDefault()}
+			>
+				{values.map((value: Option<V>, index: number) => (
+					<DropdownMenuCheckboxItem
+						onSelect={(e) => e.preventDefault()}
+						key={index}
+						checked={isOptionSelected(value.value)}
+						onCheckedChange={() => handleSelectChange(value.value)}
+					>
+						{value.label}
+					</DropdownMenuCheckboxItem>
+				))}
+			</DropdownMenuContent>
+		</DropdownMenu>
 	);
 };
 
