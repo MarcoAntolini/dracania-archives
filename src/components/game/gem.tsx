@@ -45,7 +45,8 @@ export default function RenderGem({ gem }: { gem: Gem }) {
 				<p>Can be socketed into: All equipment items</p>
 			</div>
 			<p className="gem-info">
-				Socketable amount: {gem.role === "offensive" ? 30 : gem.role === "defensive" ? 50 : 10}
+				Socketable amount:{" "}
+				{gem.role === "opal" ? 10 : ["Onyx", "Zircon", "Rhodolite", "Emerald"].includes(gem.type) ? 30 : 50}
 			</p>
 		</div>
 	);

@@ -40,7 +40,7 @@ export default function FeedbackPage() {
 	return (
 		<div className="flex flex-col items-center gap-8 p-5 md:p-10">
 			<h1 className="text-2xl font-bold text-custom-main">Provide your feedback</h1>
-			<p className="text-sm text-gray-500">
+			<p className="text-center text-sm text-gray-500">
 				Your feedback is important to us. Please share your thoughts and suggestions, or report any bugs you find.
 			</p>
 			<Form {...form}>
