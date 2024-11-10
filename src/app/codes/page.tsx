@@ -60,37 +60,37 @@ export default function CodesPage() {
 	// 	.sort((a, b) => a.secondsLeft! - b.secondsLeft!);
 
 	return (
-		<PhotoProvider>
-			<div className="6 flex max-w-full flex-col py-10 md:px-10 4xl:flex-row">
-				<div className="flex flex-col gap-4 4xl:w-1/2">
-					<h2 className="mb-2 px-3 text-2xl text-custom-main">Active Bonus Codes</h2>
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>Code</TableHead>
-								<TableHead className="min-w-[125px]">Release Date</TableHead>
-								<TableHead className="min-w-[145px]">Expiration Date</TableHead>
-								<TableHead className="w-[471px]">Screenshot</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{activeCodes.slice((currentPage - 1) * codesPerPage, currentPage * codesPerPage).map((code) => {
-								return (
-									<TableRow key={code.code}>
-										<TableCell className="font-tahoma font-bold text-custom-main">{code.code}</TableCell>
-										<TableCell>{code.releaseDate}</TableCell>
-										<TableCell
-											className={`${
-												code.daysRemaining <= 1
-													? "text-orange-600"
-													: code.daysRemaining <= 3
-														? "text-yellow-600"
-														: "text-green-600"
-											}`}
-										>
-											{code.expirationDate}
-										</TableCell>
-										<TableCell>
+		<div className="flex max-w-full flex-col py-10 md:px-10 4xl:flex-row 4xl:gap-10">
+			<div className="flex flex-col gap-4 4xl:w-1/2">
+				<h2 className="mb-2 px-3 text-2xl text-custom-main">Active Bonus Codes</h2>
+				<Table>
+					<TableHeader>
+						<TableRow>
+							<TableHead>Code</TableHead>
+							<TableHead className="min-w-[125px]">Release Date</TableHead>
+							<TableHead className="min-w-[145px]">Expiration Date</TableHead>
+							<TableHead className="w-[471px]">Screenshot</TableHead>
+						</TableRow>
+					</TableHeader>
+					<TableBody>
+						{activeCodes.slice((currentPage - 1) * codesPerPage, currentPage * codesPerPage).map((code) => {
+							return (
+								<TableRow key={code.code}>
+									<TableCell className="font-tahoma font-bold text-custom-main">{code.code}</TableCell>
+									<TableCell>{code.releaseDate}</TableCell>
+									<TableCell
+										className={`${
+											code.daysRemaining <= 1
+												? "text-orange-600"
+												: code.daysRemaining <= 3
+													? "text-yellow-600"
+													: "text-green-600"
+										}`}
+									>
+										{code.expirationDate}
+									</TableCell>
+									<TableCell>
+										<PhotoProvider bannerVisible={false}>
 											<PhotoView src={`/images/db/codes/${code.code.toLowerCase()}.png`} key={code.code}>
 												<Image
 													src={`/images/db/codes/${code.code.toLowerCase()}.png`}
@@ -100,40 +100,42 @@ export default function CodesPage() {
 													className="cursor-pointer"
 												/>
 											</PhotoView>
-										</TableCell>
-									</TableRow>
-								);
-							})}
-						</TableBody>
-					</Table>
-					<Pagination
-						items={activeCodes.length}
-						itemsPerPage={5}
-						currentPage={currentPage}
-						setCurrentPage={setCurrentPage}
-						itemsName="codes"
-					/>
-				</div>
-				<Separator className="my-10 4xl:hidden" />
-				<div className="flex flex-col gap-4 4xl:w-1/2">
-					<h2 className="mb-2 px-3 text-2xl text-custom-main">Expired Bonus Codes</h2>
-					<Table>
-						<TableHeader>
-							<TableRow>
-								<TableHead>Code</TableHead>
-								<TableHead className="min-w-[125px]">Release Date</TableHead>
-								<TableHead className="min-w-[145px]">Expiration Date</TableHead>
-								<TableHead className="w-[471px]">Screenshot</TableHead>
-							</TableRow>
-						</TableHeader>
-						<TableBody>
-							{expiredCodes.slice((currentPage - 1) * codesPerPage, currentPage * codesPerPage).map((code) => {
-								return (
-									<TableRow key={code.code}>
-										<TableCell className="font-tahoma font-bold text-custom-main">{code.code}</TableCell>
-										<TableCell>{code.releaseDate}</TableCell>
-										<TableCell className="text-red-600">{code.expirationDate}</TableCell>
-										<TableCell>
+										</PhotoProvider>
+									</TableCell>
+								</TableRow>
+							);
+						})}
+					</TableBody>
+				</Table>
+				<Pagination
+					items={activeCodes.length}
+					itemsPerPage={5}
+					currentPage={currentPage}
+					setCurrentPage={setCurrentPage}
+					itemsName="codes"
+				/>
+			</div>
+			<Separator className="my-10 4xl:hidden" />
+			<div className="flex flex-col gap-4 4xl:w-1/2">
+				<h2 className="mb-2 px-3 text-2xl text-custom-main">Expired Bonus Codes</h2>
+				<Table>
+					<TableHeader>
+						<TableRow>
+							<TableHead>Code</TableHead>
+							<TableHead className="min-w-[125px]">Release Date</TableHead>
+							<TableHead className="min-w-[145px]">Expiration Date</TableHead>
+							<TableHead className="w-[471px]">Screenshot</TableHead>
+						</TableRow>
+					</TableHeader>
+					<TableBody>
+						{expiredCodes.slice((currentPage - 1) * codesPerPage, currentPage * codesPerPage).map((code) => {
+							return (
+								<TableRow key={code.code}>
+									<TableCell className="font-tahoma font-bold text-custom-main">{code.code}</TableCell>
+									<TableCell>{code.releaseDate}</TableCell>
+									<TableCell className="text-red-600">{code.expirationDate}</TableCell>
+									<TableCell>
+										<PhotoProvider bannerVisible={false}>
 											<PhotoView src={`/images/db/codes/${code.code.toLowerCase()}.png`} key={code.code}>
 												<Image
 													src={`/images/db/codes/${code.code.toLowerCase()}.png`}
@@ -143,21 +145,22 @@ export default function CodesPage() {
 													className="cursor-pointer"
 												/>
 											</PhotoView>
-										</TableCell>
-									</TableRow>
-								);
-							})}
-						</TableBody>
-					</Table>
-					<Pagination
-						items={expiredCodes.length}
-						itemsPerPage={5}
-						currentPage={currentPage}
-						setCurrentPage={setCurrentPage}
-						itemsName="codes"
-					/>
-				</div>
-				{/* <div className="flex gap-2 md:gap-3">
+										</PhotoProvider>
+									</TableCell>
+								</TableRow>
+							);
+						})}
+					</TableBody>
+				</Table>
+				<Pagination
+					items={expiredCodes.length}
+					itemsPerPage={5}
+					currentPage={currentPage}
+					setCurrentPage={setCurrentPage}
+					itemsName="codes"
+				/>
+			</div>
+			{/* <div className="flex gap-2 md:gap-3">
 									<div className="mt-1 h-[15px] w-[130px] min-w-[130px] max-w-[130px] rounded bg-stone-300 md:w-[165px] md:min-w-[165px] md:max-w-[165px]">
 										<div
 											style={{ width: `${code.percentageElapsed}%` }}
@@ -204,7 +207,6 @@ export default function CodesPage() {
 													} left`}
 									</p>
 								</div> */}
-			</div>
-		</PhotoProvider>
+		</div>
 	);
 }
