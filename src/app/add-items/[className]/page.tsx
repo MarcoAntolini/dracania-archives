@@ -42,7 +42,7 @@ export default function ClassPage({ params }: { params: { className: string } })
 		router.push("/add-items");
 	}
 
-	const tab = useSearchParams().get("tab");
+	const tab = useSearchParams()?.get("tab");
 	if (tab !== "items" && tab !== "sets") {
 		router.push(`/add-items/${params.className}?tab=items`);
 	}
