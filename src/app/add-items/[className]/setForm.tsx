@@ -14,7 +14,6 @@ import { type Class, type ItemSet, type StatType } from "@/types/items";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "convex/react";
 import { Check, ChevronsUpDown, PlusIcon, TrashIcon } from "lucide-react";
-import { useCookies } from "next-client-cookies";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -105,8 +104,6 @@ export default function SetForm({
 	const name = form.watch("name");
 	const set = useQuery(api.queries.sets.getSetByName, { setName: name ?? "", class: classValue });
 
-	const cookies = useCookies();
-
 	function handleSetSet() {
 		setSet({
 			name: form.getValues("name"),
@@ -133,6 +130,8 @@ export default function SetForm({
 		}
 	}
 
+	const currentUser = useQuery(api.queries.users.getCurrentUser);
+
 	function onSubmit(values: z.infer<typeof setFormSchema>) {
 		if (set) {
 			toast.warning("Set already exists");
@@ -144,14 +143,10 @@ export default function SetForm({
 				class: classValue,
 				items: values.items.map((item) => item.name),
 				setBonus: values.setBonus,
-				contributorUsername: cookies.get("username") ?? undefined,
+				contributorUsername: currentUser?.username ?? undefined,
 			});
 			clearSetForm();
 			toast.success("Set created successfully");
-			// fetch("/api/send-contribution-email", {
-			// 	method: "POST",
-			// 	body: JSON.stringify({ type: "set", class: classValue, name: values.name }),
-			// });
 			console.log("Form submitted with values:", values);
 		} catch (error) {
 			console.error("Error in form submission:", error);

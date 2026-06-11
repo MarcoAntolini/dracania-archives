@@ -1,6 +1,12 @@
-import { v } from "convex/values";
 import { Classes } from "@/types/consts";
+import { v } from "convex/values";
 import { query } from "../_generated/server";
+
+export const getAllSets = query({
+	handler: async (ctx) => {
+		return await ctx.db.query("sets").collect();
+	},
+});
 
 export const getSetsByClass = query({
 	args: v.object({

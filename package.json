@@ -11,6 +11,8 @@
 		"stripe:trigger": "stripe trigger payment_intent.succeeded"
 	},
 	"dependencies": {
+		"@auth/core": "^0.36.0",
+		"@convex-dev/auth": "^0.0.74",
 		"@hookform/resolvers": "^3.9.0",
 		"@radix-ui/react-alert-dialog": "^1.1.2",
 		"@radix-ui/react-avatar": "^1.1.1",
@@ -34,6 +36,7 @@
 		"cmdk": "^1.0.0",
 		"convex": "^1.17.0",
 		"date-fns": "^3.6.0",
+		"fs": "^0.0.1-security",
 		"lucide-react": "^0.447.0",
 		"mailersend": "^2.3.0",
 		"moment": "^2.30.1",
@@ -43,6 +46,7 @@
 		"next-themes": "^0.3.0",
 		"next-usequerystate": "^1.13.2",
 		"nuqs": "^2.1.1",
+		"posthog-js": "^1.187.0",
 		"react": "^18",
 		"react-day-picker": "^8.10.1",
 		"react-device-detect": "^2.2.3",

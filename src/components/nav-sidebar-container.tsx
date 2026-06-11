@@ -52,7 +52,7 @@ export function NavSidebarContainer({
 	};
 
 	const [isOpen, setIsOpen] = useState<boolean[]>(
-		items.map((item) => (item.isCollapsible ? item.isActive ?? false : false)),
+		items.map((item) => (item.isCollapsible ? (item.isActive ?? false) : false)),
 	);
 
 	return (
@@ -75,12 +75,16 @@ export function NavSidebarContainer({
 									disabled={item.isDisabled}
 								>
 									<Link
-										href={item.isCollapsible ? "#" : item.url ?? "#"}
+										href={item.isCollapsible ? "#" : (item.url ?? "#")}
 										className={item.isDisabled ? "pointer-events-none" : ""}
 										target={item.url?.includes("http") ? "_blank" : "_self"}
 									>
-										{item.image && <Image src={item.image} alt={item.title} width={25} height={25} />}
-										{item.icon && <item.icon />}
+										{item.isDisabled ? (
+												<Image src="/images/icons/locked.png" alt="locked" width={20} height={20} className="opacity-50 m-[2.5px]" />
+										) : (
+											item.image && <Image src={item.image} alt={item.title} width={25} height={25} />
+										)}
+										{item.icon && <item.icon size={25} />}
 										<span className={item.isDisabled ? "text-muted-foreground" : ""}>{item.title}</span>
 										{item.isCollapsible && (
 											<SidebarMenuAction

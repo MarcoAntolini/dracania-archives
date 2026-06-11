@@ -1,8 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { api } from "@/convex/_generated/api";
 import { loadStripe } from "@stripe/stripe-js";
-import { useCookies } from "next-client-cookies";
+import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -10,12 +11,13 @@ loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY as string);
 
 export default function DonatePage() {
 	const router = useRouter();
-	const cookies = useCookies();
+
+	const currentUser = useQuery(api.queries.users.getCurrentUser);
 
 	const handleDonate = async () => {
 		await fetch("/api/create-checkout-session", {
 			method: "POST",
-			body: JSON.stringify({ username: cookies.get("username") }),
+			body: JSON.stringify({ username: currentUser?.username }),
 		})
 			.then((res) => res.json())
 			.then((response) => {

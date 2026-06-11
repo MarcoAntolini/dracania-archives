@@ -1,3 +1,4 @@
+import { Classes } from "@/types/consts";
 import { v } from "convex/values";
 import { internalQuery, query } from "../_generated/server";
 
@@ -63,12 +64,25 @@ export const getTotalItems = query({
 
 export const getImage = internalQuery({
 	args: {
-		class: v.union(v.literal("dwarf"), v.literal("mage"), v.literal("ranger"), v.literal("warrior")),
+		class: v.union(
+			v.literal(Classes.dragonknight),
+			v.literal(Classes.ranger),
+			v.literal(Classes.spellweaver),
+			v.literal(Classes.steamMechanicus),
+		),
 		imageName: v.string(),
 	},
 	handler: async (ctx, args) => {
+		const commonClassName =
+			args.class === Classes.dragonknight
+				? "warrior"
+				: args.class === Classes.ranger
+					? "ranger"
+					: args.class === Classes.spellweaver
+						? "mage"
+						: "dwarf";
 		const image = await ctx.db
-			.query(`${args.class}Images`)
+			.query(`${commonClassName}Images`)
 			.filter((q) => q.eq(q.field("imageName"), args.imageName))
 			.first();
 		return image;

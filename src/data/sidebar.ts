@@ -24,7 +24,7 @@ export const sidebarData = {
 			url: "/items",
 			image: "/images/icons/items.png",
 			isCollapsible: true,
-			isActive: true,
+			isActive: false,
 			items: [
 				{
 					title: "Steam Mechanicus",

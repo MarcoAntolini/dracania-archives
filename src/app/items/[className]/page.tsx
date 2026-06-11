@@ -1,6 +1,6 @@
 "use client";
 
-import Pagination from "@/components/customPagination";
+import Pagination from "@/components/custom-pagination";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import MultiSelect from "@/components/ui/multi-select";

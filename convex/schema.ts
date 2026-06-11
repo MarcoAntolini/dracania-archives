@@ -1,4 +1,7 @@
-import { Classes, Rarities, Slots } from "@/types/consts";
+import { Classes, Rarities, Slots, StatTypes } from "@/types/consts";
+import { ContributionStatus } from "@/types/enums/contributions";
+import { Roles } from "@/types/enums/roles";
+import { authTables } from "@convex-dev/auth/server";
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
@@ -24,6 +27,13 @@ export const setSchema = {
 		}),
 	),
 	approved: v.optional(v.boolean()),
+	contributionStatus: v.optional(
+		v.union(
+			v.literal(ContributionStatus.pending),
+			v.literal(ContributionStatus.approved),
+			v.literal(ContributionStatus.rejected),
+		),
+	),
 	contributorUsername: v.optional(v.string()),
 };
 
@@ -74,7 +84,21 @@ export const itemSchema = {
 	level: v.number(),
 	stats: v.array(
 		v.object({
-			stat: v.string(),
+			stat: v.union(
+				v.literal(StatTypes.allResistance),
+				v.literal(StatTypes.andermagicResistance),
+				v.literal(StatTypes.armorValue),
+				v.literal(StatTypes.attacksPerSecond),
+				v.literal(StatTypes.blockValue),
+				v.literal(StatTypes.criticalValue),
+				v.literal(StatTypes.damage),
+				v.literal(StatTypes.fireResistance),
+				v.literal(StatTypes.healthPoints),
+				v.literal(StatTypes.iceResistance),
+				v.literal(StatTypes.lightningResistance),
+				v.literal(StatTypes.movementSpeed),
+				v.literal(StatTypes.poisonResistance),
+			),
 			minValue: v.number(),
 			maxValue: v.number(),
 		}),
@@ -85,7 +109,21 @@ export const itemSchema = {
 			v.object({
 				bonus: v.union(
 					v.object({
-						stat: v.string(),
+						stat: v.union(
+							v.literal(StatTypes.allResistance),
+							v.literal(StatTypes.andermagicResistance),
+							v.literal(StatTypes.armorValue),
+							v.literal(StatTypes.attacksPerSecond),
+							v.literal(StatTypes.blockValue),
+							v.literal(StatTypes.criticalValue),
+							v.literal(StatTypes.damage),
+							v.literal(StatTypes.fireResistance),
+							v.literal(StatTypes.healthPoints),
+							v.literal(StatTypes.iceResistance),
+							v.literal(StatTypes.lightningResistance),
+							v.literal(StatTypes.movementSpeed),
+							v.literal(StatTypes.poisonResistance),
+						),
 						value: v.union(v.number(), v.string()),
 					}),
 					v.string(),
@@ -94,18 +132,19 @@ export const itemSchema = {
 		),
 	),
 	approved: v.optional(v.boolean()),
+	contributionStatus: v.optional(
+		v.union(
+			v.literal(ContributionStatus.pending),
+			v.literal(ContributionStatus.approved),
+			v.literal(ContributionStatus.rejected),
+		),
+	),
 	contributorUsername: v.optional(v.string()),
 };
 
 const imageSchema = {
 	imageName: v.string(),
 	isMissing: v.boolean(),
-};
-
-const usernameSchema = {
-	username: v.string(),
-	ipAddress: v.string(),
-	timestamp: v.string(),
 };
 
 const donationSchema = {
@@ -115,24 +154,19 @@ const donationSchema = {
 };
 
 const userSchema = {
-	username: v.string(),
-	password: v.string(),
-	token: v.optional(
-		v.object({
-			id: v.string(),
-			expires: v.string(),
-		}),
-	),
+	email: v.optional(v.string()),
+	image: v.optional(v.string()),
+	role: v.optional(v.union(v.literal(Roles.owner), v.literal(Roles.admin), v.literal(Roles.user))),
 };
 
 export default defineSchema({
+	...authTables,
 	items: defineTable(itemSchema),
 	sets: defineTable(setSchema),
 	dwarfImages: defineTable(imageSchema),
 	mageImages: defineTable(imageSchema),
 	warriorImages: defineTable(imageSchema),
 	rangerImages: defineTable(imageSchema),
-	usernames: defineTable(usernameSchema),
 	donations: defineTable(donationSchema),
 	users: defineTable(userSchema),
 });

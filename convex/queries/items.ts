@@ -1,6 +1,13 @@
 import { Classes } from "@/types/consts";
+import { ContributionStatus } from "@/types/enums/contributions";
 import { v } from "convex/values";
 import { internalQuery, query } from "../_generated/server";
+
+export const getAllItems = query({
+	handler: async (ctx) => {
+		return await ctx.db.query("items").collect();
+	},
+});
 
 export const getItemsByClass = query({
 	args: {
@@ -44,7 +51,7 @@ export const getApprovedItemsByClass = query({
 		),
 	},
 	handler: async (ctx, args) => {
-		return (await getItemsByClass(ctx, args)).filter((item) => item.approved);
+		return (await getItemsByClass(ctx, args)).filter((item) => item.contributionStatus === ContributionStatus.approved);
 	},
 });
 
@@ -69,7 +76,16 @@ export const getNonApprovedItems = query({
 	handler: async (ctx) => {
 		return await ctx.db
 			.query("items")
-			.filter((q) => q.eq(q.field("approved"), false))
+			.filter((q) => q.eq(q.field("contributionStatus"), ContributionStatus.pending))
+			.collect();
+	},
+});
+
+export const getRejectedItems = query({
+	handler: async (ctx) => {
+		return await ctx.db
+			.query("items")
+			.filter((q) => q.eq(q.field("contributionStatus"), ContributionStatus.rejected))
 			.collect();
 	},
 });
@@ -79,7 +95,7 @@ export const getNewlyAddedItems = internalQuery({
 	handler: async (ctx) => {
 		return await ctx.db
 			.query("items")
-			.filter((q) => q.eq(q.field("approved"), false))
+			.filter((q) => q.eq(q.field("contributionStatus"), ContributionStatus.pending))
 			.filter((q) => q.gt(q.field("_creationTime"), new Date(Date.now() - 1 * 60 * 60 * 1000).getTime()))
 			.collect();
 	},

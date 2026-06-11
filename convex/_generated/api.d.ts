@@ -13,17 +13,24 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as actions_authAccounts from "../actions/authAccounts.js";
 import type * as actions_items from "../actions/items.js";
+import type * as actions_updateDB from "../actions/updateDB.js";
+import type * as actions_users from "../actions/users.js";
+import type * as auth from "../auth.js";
+import type * as authAction from "../authAction.js";
 import type * as crons from "../crons.js";
+import type * as http from "../http.js";
 import type * as mutations_donations from "../mutations/donations.js";
 import type * as mutations_images from "../mutations/images.js";
 import type * as mutations_items from "../mutations/items.js";
 import type * as mutations_sets from "../mutations/sets.js";
-import type * as mutations_usernames from "../mutations/usernames.js";
 import type * as mutations_users from "../mutations/users.js";
+import type * as queries_authAccounts from "../queries/authAccounts.js";
 import type * as queries_images from "../queries/images.js";
 import type * as queries_items from "../queries/items.js";
 import type * as queries_sets from "../queries/sets.js";
+import type * as queries_users from "../queries/users.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -34,17 +41,24 @@ import type * as queries_sets from "../queries/sets.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "actions/authAccounts": typeof actions_authAccounts;
   "actions/items": typeof actions_items;
+  "actions/updateDB": typeof actions_updateDB;
+  "actions/users": typeof actions_users;
+  auth: typeof auth;
+  authAction: typeof authAction;
   crons: typeof crons;
+  http: typeof http;
   "mutations/donations": typeof mutations_donations;
   "mutations/images": typeof mutations_images;
   "mutations/items": typeof mutations_items;
   "mutations/sets": typeof mutations_sets;
-  "mutations/usernames": typeof mutations_usernames;
   "mutations/users": typeof mutations_users;
+  "queries/authAccounts": typeof queries_authAccounts;
   "queries/images": typeof queries_images;
   "queries/items": typeof queries_items;
   "queries/sets": typeof queries_sets;
+  "queries/users": typeof queries_users;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

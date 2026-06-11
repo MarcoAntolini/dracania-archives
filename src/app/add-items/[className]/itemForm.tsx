@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { Rarities, Slots, StatTypes } from "@/types/consts";
-import { dwarfImages, mageImages, rangerImages, warriorImages } from "@/types/images";
+import { dwarfImages, mageImages, rangerImages, warriorImages } from "@/types/images/items";
 import type {
 	BaseStat,
 	Bonus,
@@ -26,8 +27,7 @@ import type {
 } from "@/types/items";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "convex/react";
-import { Check, ChevronsUpDown, PlusIcon, TrashIcon } from "lucide-react";
-import { useCookies } from "next-client-cookies";
+import { Check, CheckIcon, ChevronsUpDown, PlusIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -130,14 +130,20 @@ export default function ItemForm({
 	classValue,
 	setItem,
 	clearItemForm,
+	defaultValues,
+	formType,
+	editSubmit,
 }: {
 	classValue: Class;
-	setItem: (item: Item) => void;
+	setItem?: (item: Item) => void;
 	clearItemForm: () => void;
+	defaultValues?: z.infer<typeof itemFormSchema> & { _id: Id<"items">; class: Class };
+	formType: "add" | "edit";
+	editSubmit?: () => void;
 }) {
 	const form = useForm<z.infer<typeof itemFormSchema>>({
 		resolver: zodResolver(itemFormSchema),
-		defaultValues: {},
+		defaultValues: defaultValues ?? {},
 	});
 
 	const name = form.watch("name");
@@ -194,8 +200,6 @@ export default function ItemForm({
 		itemName: name ?? "",
 	});
 
-	const cookies = useCookies();
-
 	function handleSetItem() {
 		const formValues = form.getValues();
 		const itemData: Partial<Item> = {
@@ -229,7 +233,9 @@ export default function ItemForm({
 					: uniqueBonus.bonus) as Bonus,
 			}));
 		}
-		setItem(itemData as Item);
+		if (setItem) {
+			setItem(itemData as Item);
+		}
 		document.getElementById("preview")?.scrollIntoView({ behavior: "smooth", block: "start" });
 	}
 
@@ -241,7 +247,9 @@ export default function ItemForm({
 		}
 	}
 
-	function onSubmit(values: z.infer<typeof itemFormSchema>) {
+	const currentUser = useQuery(api.queries.users.getCurrentUser);
+
+	function handleAddSubmit(values: z.infer<typeof itemFormSchema>) {
 		if (item) {
 			toast.warning("Item already exists");
 			return;
@@ -261,17 +269,36 @@ export default function ItemForm({
 				stats: values.stats.filter((stat) => stat.stat !== undefined) as BaseStat[],
 				setName: values.setName ?? undefined,
 				uniqueBonus: values.uniqueBonus ?? undefined,
-				contributorUsername: cookies.get("username") ?? undefined,
+				contributorUsername: currentUser?.username ?? undefined,
 			});
 			clearItemForm();
 			toast.success("Item created successfully");
-			// fetch("/api/send-contribution-email", {
-			// 	method: "POST",
-			// 	body: JSON.stringify({ type: "item", class: classValue, name: values.name }),
-			// });
 			console.log("Form submitted with values:", values);
 		} catch (error) {
 			console.error("Error in form submission:", error);
+		}
+	}
+
+	const updateItem = useMutation(api.mutations.items.updateItem);
+
+	function handleEditSubmit(values: z.infer<typeof itemFormSchema>) {
+		if (!defaultValues?._id || !editSubmit) {
+			return;
+		}
+		updateItem({
+			_id: defaultValues._id,
+			...values,
+			class: defaultValues.class as Class,
+			stats: values.stats.filter((stat) => stat.stat !== undefined) as BaseStat[],
+		});
+		editSubmit();
+	}
+
+	function onSubmit(values: z.infer<typeof itemFormSchema>) {
+		if (formType === "add") {
+			handleAddSubmit(values);
+		} else {
+			handleEditSubmit(values);
 		}
 	}
 
@@ -786,9 +813,16 @@ export default function ItemForm({
 						<Button variant="outline" type="button" onClick={handleSetItem}>
 							Preview item
 						</Button>
-						<Button type="submit" onClick={checkForm}>
-							Submit
-						</Button>
+						{formType === "add" ? (
+							<Button type="submit" onClick={checkForm}>
+								Submit
+							</Button>
+						) : (
+							<Button type="submit" className="bg-green-500 hover:bg-green-600" onClick={checkForm}>
+								<CheckIcon className="h-4 w-4" />
+								Save and approve
+							</Button>
+						)}
 					</CardFooter>
 				</form>
 			</Form>

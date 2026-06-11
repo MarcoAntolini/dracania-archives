@@ -1,7 +1,8 @@
+import type { Doc, Id } from "@/convex/_generated/dataModel";
 import type { Prettify } from "ts-hover-prettify";
 import { Classes, Rarities, Slots, StatTypes } from "./consts";
+import type { AllImage } from "./images/items";
 import type { Percentage, String } from "./utilities";
-import type { AllImage } from "./images";
 
 type Class = (typeof Classes)[keyof typeof Classes];
 
@@ -86,3 +87,5 @@ export type {
 	StatType,
 	UniqueItem,
 };
+
+export type DbItem = Doc<"items">;
