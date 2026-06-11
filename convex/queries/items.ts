@@ -3,6 +3,13 @@ import { ContributionStatus } from "@/types/enums/contributions";
 import { v } from "convex/values";
 import { internalQuery, query } from "../_generated/server";
 
+function isApprovedItem(item: { contributionStatus?: ContributionStatus; approved?: boolean }) {
+	return (
+		item.contributionStatus === ContributionStatus.approved ||
+		(item.contributionStatus === undefined && item.approved === true)
+	);
+}
+
 export const getAllItems = query({
 	handler: async (ctx) => {
 		return await ctx.db.query("items").collect();
@@ -51,7 +58,7 @@ export const getApprovedItemsByClass = query({
 		),
 	},
 	handler: async (ctx, args) => {
-		return (await getItemsByClass(ctx, args)).filter((item) => item.contributionStatus === ContributionStatus.approved);
+		return (await getItemsByClass(ctx, args)).filter(isApprovedItem);
 	},
 });
 

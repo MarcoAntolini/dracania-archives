@@ -157,6 +157,15 @@ const userSchema = {
 	email: v.optional(v.string()),
 	image: v.optional(v.string()),
 	role: v.optional(v.union(v.literal(Roles.owner), v.literal(Roles.admin), v.literal(Roles.user))),
+	// Legacy prod records from the pre-auth migration
+	username: v.optional(v.string()),
+	password: v.optional(v.string()),
+	token: v.optional(
+		v.object({
+			id: v.string(),
+			expires: v.string(),
+		}),
+	),
 };
 
 export default defineSchema({

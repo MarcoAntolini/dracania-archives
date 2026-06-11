@@ -66,8 +66,12 @@ async function main() {
 		convexQuery("queries/sets:getAllSets"),
 	]);
 
-	const approvedItems = items.filter((item) => item.contributionStatus === "approved");
-	const approvedSets = sets.filter((set) => set.contributionStatus === "approved");
+	const approvedItems = items.filter(
+		(item) => item.contributionStatus === "approved" || (item.contributionStatus === undefined && item.approved === true),
+	);
+	const approvedSets = sets.filter(
+		(set) => set.contributionStatus === "approved" || (set.contributionStatus === undefined && set.approved === true),
+	);
 
 	await Promise.all([
 		writeFile(path.join(outputDir, "items.json"), JSON.stringify(approvedItems, null, 2)),

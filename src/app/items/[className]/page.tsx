@@ -21,7 +21,10 @@ import { ClipLoader } from "react-spinners";
 export default function Page({ params }: { params: { className: string } }) {
 	const selectedClass = availableClasses.find((c) => c.commonName === params.className)?.name;
 
-	const items = useQuery(api.queries.items.getApprovedItemsByClass, { class: selectedClass! });
+	const items = useQuery(
+		api.queries.items.getApprovedItemsByClass,
+		selectedClass ? { class: selectedClass } : "skip",
+	);
 
 	const [ref, { width }] = useMeasure();
 	const [currentPage, setCurrentPage] = useState(1);
@@ -47,12 +50,7 @@ export default function Page({ params }: { params: { className: string } }) {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [width]);
 
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-	useEffect(() => {
-		if (items !== undefined) {
-			setIsLoading(false);
-		}
-	}, [items]);
+	const isLoading = items === undefined;
 
 	const [selectedRarity, setSelectedRarity] = useQueryState("rarity", parseAsStringLiteral(Object.values(Rarities)));
 	const [selectedSlot, setSelectedSlot] = useQueryState("slot", parseAsString);

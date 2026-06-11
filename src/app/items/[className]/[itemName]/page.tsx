@@ -13,13 +13,16 @@ import { ClipLoader } from "react-spinners";
 export default function Page({ params }: { params: { className: string; itemName: string } }) {
 	const router = useRouter();
 
-	const className = availableClasses.find((c) => c.commonName === params.className)?.name!;
+	const className = availableClasses.find((c) => c.commonName === params.className)?.name;
 	const itemName = params.itemName.replaceAll("%20", " ");
 
-	const queryItem = useQuery(api.queries.items.getApprovedItemByName, { class: className, name: itemName });
+	const queryItem = useQuery(
+		api.queries.items.getApprovedItemByName,
+		className ? { class: className, name: itemName } : "skip",
+	);
 
 	const [item, setItem] = useState<Item | null>(null);
-	const [isLoading, setIsLoading] = useState(true);
+	const isLoading = queryItem === undefined;
 
 	useEffect(() => {
 		if (queryItem !== undefined && queryItem === null) {
@@ -27,7 +30,6 @@ export default function Page({ params }: { params: { className: string; itemName
 		} else if (queryItem) {
 			const { _id, _creationTime, approved, contributorUsername, ...newItem } = queryItem;
 			setItem(newItem as Item);
-			setIsLoading(false);
 		}
 	}, [queryItem, router]);
 
