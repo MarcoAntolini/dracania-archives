@@ -1,4 +1,5 @@
 import CustomSeparator from "@/components/game/custom-separator";
+import { MaintenancePage } from "@/components/maintenance-page";
 import { StaticImage as Image } from "@/components/ui/static-image";
 import news from "@/data/news";
 import { getMaintenanceMode } from "@/lib/maintenance-mode";
@@ -13,6 +14,10 @@ export default async function Home() {
 		cookies: cookies(),
 	});
 
+	if (isMaintenanceMode) {
+		return <MaintenancePage />;
+	}
+
 	return (
 		<div className="relative flex flex-col items-center justify-center">
 			<Image
@@ -26,19 +31,6 @@ export default async function Home() {
 			<div className="flex w-full max-w-[1200px] flex-col items-center justify-center">
 				<CustomSeparator type="main" />
 				<h1 className="mx-4 my-9 text-center text-4xl text-custom-main md:text-5xl">Welcome to Dracania Archives</h1>
-				{isMaintenanceMode ? (
-					<section
-						aria-live="polite"
-						className="mx-4 mb-10 max-w-[90%] rounded-lg border border-amber-400/70 bg-amber-950/40 p-5 text-center shadow-lg shadow-amber-950/20"
-					>
-						<p className="text-sm uppercase tracking-[0.3em] text-amber-300">Maintenance Mode</p>
-						<h2 className="mt-3 text-2xl font-semibold text-white">Dracania Archives is temporarily locked down.</h2>
-						<p className="mx-auto mt-3 max-w-2xl text-base text-amber-100/90">
-							We are working on the website right now. Browsing, account actions, contributions, donations, and API
-							actions are unavailable until maintenance is complete.
-						</p>
-					</section>
-				) : null}
 				<div className="mb-10 w-full max-w-[90%] rounded-lg border border-custom-main p-5 pb-7">
 					<h2 className="text-2xl font-semibold text-custom-main">News</h2>
 					<ol className="relative border-s border-custom-main">
@@ -59,16 +51,12 @@ export default async function Home() {
 							</li>
 						))}
 					</ol>
-					{isMaintenanceMode ? (
-						<p className="mt-4 text-sm text-custom-muted">The news archive will be available again after maintenance.</p>
-					) : (
-						<Link
-							href="/website-news"
-							className="ml-auto mt-4 rounded bg-custom-main px-4 py-2 text-gray-100 transition-all duration-200 ease-in-out hover:bg-custom-main-darker hover:text-white"
-						>
-							Read all
-						</Link>
-					)}
+					<Link
+						href="/website-news"
+						className="ml-auto mt-4 rounded bg-custom-main px-4 py-2 text-gray-100 transition-all duration-200 ease-in-out hover:bg-custom-main-darker hover:text-white"
+					>
+						Read all
+					</Link>
 				</div>
 			</div>
 		</div>

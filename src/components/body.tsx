@@ -13,8 +13,18 @@ import { usePathname } from "next/navigation";
 import React, { Fragment } from "react";
 import CustomSeparator from "./game/custom-separator";
 
-export default function Body({ children }: { children: React.ReactNode }) {
+export default function Body({
+	children,
+	maintenanceMode = false,
+}: {
+	children: React.ReactNode;
+	maintenanceMode?: boolean;
+}) {
 	const pathname = usePathname();
+
+	if (maintenanceMode) {
+		return <main className="relative flex flex-1 flex-col">{children}</main>;
+	}
 
 	return (
 		<SidebarInset>
