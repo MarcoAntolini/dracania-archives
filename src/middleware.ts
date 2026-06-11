@@ -4,7 +4,10 @@ import {
 	nextjsMiddlewareRedirect,
 } from "@convex-dev/auth/nextjs/server";
 import { ConvexHttpClient } from "convex/browser";
+import { NextResponse } from "next/server";
 import { api } from "../convex/_generated/api";
+import { getMaintenanceMode } from "./lib/maintenance-mode";
+import { getMaintenanceResponseType } from "./lib/maintenance";
 import { availableClasses } from "./types/common/classes";
 
 const isSignInPage = createRouteMatcher(["/login"]);
@@ -13,6 +16,39 @@ const isAdminRoute = createRouteMatcher(["/admin", "/admin/(.*)"]);
 const isOwnerRoute = createRouteMatcher(["/owner", "/owner/(.*)"]);
 
 export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
+	const path = request.nextUrl.pathname;
+	const isMaintenanceMode = await getMaintenanceMode({
+		headers: request.headers,
+		cookies: request.cookies,
+	});
+	const maintenanceResponseType = isMaintenanceMode ? getMaintenanceResponseType(request.nextUrl.href) : "allow";
+
+	if (maintenanceResponseType === "unavailable") {
+		return NextResponse.json(
+			{ error: "Dracania Archives is temporarily unavailable while maintenance is in progress." },
+			{
+				status: 503,
+				headers: {
+					"Cache-Control": "no-store",
+					"Retry-After": "3600",
+					"X-Robots-Tag": "noindex, nofollow",
+				},
+			},
+		);
+	}
+
+	if (maintenanceResponseType === "redirect") {
+		const url = request.nextUrl.clone();
+		url.pathname = "/";
+		url.searchParams.set("from", path);
+
+		const response = NextResponse.redirect(url);
+		response.headers.set("Cache-Control", "no-store");
+		response.headers.set("X-Robots-Tag", "noindex, nofollow");
+
+		return response;
+	}
+
 	if (!convexAuth.isAuthenticated()) {
 		if (isProtectedRoute(request)) {
 			return nextjsMiddlewareRedirect(request, "/login");
@@ -35,7 +71,6 @@ export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
 		}
 	}
 
-	const path = request.nextUrl.pathname;
 	if (path.startsWith("/items/")) {
 		const className = path.split("/")[2];
 		if (className && !availableClasses.map((c) => c.commonName as string).includes(className)) {

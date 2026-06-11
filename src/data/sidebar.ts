@@ -124,7 +124,7 @@ export const sidebarData = {
 		},
 		{
 			title: "GitHub Repository",
-			url: "https://github.com/MarcoAntolini/dracania-archives",
+			url: "https://github.com/MarcoAntolini/dracania-archives/discussions",
 			icon: FaGithub,
 		},
 	],
