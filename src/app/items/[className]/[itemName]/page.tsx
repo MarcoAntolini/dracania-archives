@@ -5,7 +5,7 @@ import { api } from "@/convex/_generated/api";
 import { availableClasses } from "@/types/common/classes";
 import type { Item } from "@/types/items";
 import { useQuery } from "convex/react";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";

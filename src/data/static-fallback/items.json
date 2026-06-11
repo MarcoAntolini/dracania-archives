@@ -1,0 +1,171 @@
+[
+  {
+    "_creationTime": 1729346917316.905,
+    "_id": "j973deyneprdp896m752bxxf4x72zhz2",
+    "class": "Steam Mechanicus",
+    "contributionStatus": "approved",
+    "contributorUsername": "username1",
+    "image": "all_mythic_dragan_shoulders",
+    "level": 12,
+    "name": "asassa",
+    "rarity": "Set Item",
+    "slot": "Head, Helmet",
+    "stats": [],
+    "uniqueBonus": []
+  },
+  {
+    "_creationTime": 1729870881646.3396,
+    "_id": "j97876n2zvb0cg9ggpshbhs9ss73ay1v",
+    "class": "Ranger",
+    "contributionStatus": "approved",
+    "contributorUsername": "h4nto",
+    "image": "ranger_set_worlddrop_class_gloves",
+    "level": 145,
+    "name": "Yachak's Insight",
+    "rarity": "Set Item",
+    "set": {
+      "class": "Ranger",
+      "items": [
+        "Yachak's Way",
+        "Yachak's Insight",
+        "Yachak's Awakening"
+      ],
+      "name": "Yachak's Dream",
+      "setBonus": [
+        {
+          "bonus": {
+            "stat": "Health Points",
+            "value": "22232"
+          },
+          "requiredItems": 2
+        },
+        {
+          "bonus": {
+            "stat": "Damage",
+            "value": "2776"
+          },
+          "requiredItems": 2
+        },
+        {
+          "bonus": "+ 15% movement speed for 5 seconds upon defeating an enemy",
+          "requiredItems": 3
+        }
+      ]
+    },
+    "slot": "Hands, Gloves",
+    "stats": [
+      {
+        "maxValue": 1645,
+        "minValue": 987,
+        "stat": "Damage"
+      },
+      {
+        "maxValue": 37967,
+        "minValue": 5693,
+        "stat": "Health Points"
+      },
+      {
+        "maxValue": 1589,
+        "minValue": 636,
+        "stat": "Block Value"
+      }
+    ],
+    "uniqueBonus": []
+  },
+  {
+    "_creationTime": 1729870881646.3398,
+    "_id": "j97bz9kdkmkzyc53f0gtdckecn73b3sc",
+    "class": "Ranger",
+    "contributionStatus": "approved",
+    "contributorUsername": "h4nto",
+    "image": "ranger_set_worlddrop_class_belt",
+    "level": 145,
+    "name": "Yachak's Awakening",
+    "rarity": "Set Item",
+    "set": {
+      "class": "Ranger",
+      "items": [
+        "Yachak's Way",
+        "Yachak's Insight",
+        "Yachak's Awakening"
+      ],
+      "name": "Yachak's Dream",
+      "setBonus": [
+        {
+          "bonus": {
+            "stat": "Health Points",
+            "value": "22232"
+          },
+          "requiredItems": 2
+        },
+        {
+          "bonus": {
+            "stat": "Damage",
+            "value": "2776"
+          },
+          "requiredItems": 2
+        },
+        {
+          "bonus": "+ 15% movement speed for 5 seconds upon defeating an enemy",
+          "requiredItems": 3
+        }
+      ]
+    },
+    "slot": "Hips, Belt",
+    "stats": [
+      {
+        "maxValue": 1645,
+        "minValue": 987,
+        "stat": "Damage"
+      },
+      {
+        "maxValue": 56950,
+        "minValue": 8549,
+        "stat": "Health Points"
+      },
+      {
+        "maxValue": 2384,
+        "minValue": 953,
+        "stat": "Block Value"
+      }
+    ],
+    "uniqueBonus": []
+  },
+  {
+    "_creationTime": 1729870881646.34,
+    "_id": "j975nrjqbjyf4fzcmmbsda34fd73a10x",
+    "class": "Ranger",
+    "contributionStatus": "approved",
+    "contributorUsername": "h4nto",
+    "image": "ranger_unique_worlddrop_premium_shoulders",
+    "level": 145,
+    "name": "Royal Pauldrons of the Hunting Trap",
+    "rarity": "Unique Item",
+    "slot": "Shoulders, Pauldrons",
+    "stats": [
+      {
+        "maxValue": 1098,
+        "minValue": 439,
+        "stat": "Armor Value"
+      },
+      {
+        "maxValue": 1162,
+        "minValue": 464,
+        "stat": "All Resistance"
+      },
+      {
+        "maxValue": 1589,
+        "minValue": 636,
+        "stat": "Block Value"
+      }
+    ],
+    "uniqueBonus": [
+      {
+        "bonus": "+ 5 Concentration"
+      },
+      {
+        "bonus": "- 20.00% cooldown time for Hunting Trap"
+      }
+    ]
+  }
+]

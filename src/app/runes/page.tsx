@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { runes } from "@/data/db/runes";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useEffect, useState } from "react";
 
 export default function RunesPage() {

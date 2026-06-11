@@ -28,7 +28,8 @@ import type {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery } from "convex/react";
 import { Check, CheckIcon, ChevronsUpDown, PlusIcon, TrashIcon } from "lucide-react";
-import Image from "next/image";
+import { itemImagePath } from "@/lib/site-config";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -336,7 +337,7 @@ export default function ItemForm({
 															{field.value ? (
 																<div className="flex items-center space-x-2">
 																	<Image
-																		src={`/api/proxy-image?imageName=${field.value}`}
+																		src={itemImagePath(field.value, "thumb")}
 																		alt={field.value}
 																		width={25}
 																		height={25}
@@ -372,7 +373,7 @@ export default function ItemForm({
 																		/>
 																		<div className="flex items-center space-x-2">
 																			<Image
-																				src={`/api/proxy-image?imageName=${item.imageName}`}
+																				src={itemImagePath(item.imageName, "thumb")}
 																				alt={item.imageName}
 																				width={30}
 																				height={30}

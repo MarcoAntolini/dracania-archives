@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import codes from "@/data/real-time/codes";
 import moment from "moment";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import "react-photo-view/dist/react-photo-view.css";

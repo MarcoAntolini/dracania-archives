@@ -5,7 +5,8 @@ const nextConfig = {
 		return config;
 	},
 	images: {
-		remotePatterns: [{ protocol: "https", hostname: "api.dracania-archives.com", pathname: "/images/**", port: "" }],
+		unoptimized: true,
+		remotePatterns: [],
 	},
 };
 

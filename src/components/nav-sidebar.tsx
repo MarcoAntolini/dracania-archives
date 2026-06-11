@@ -30,7 +30,7 @@ import { hasPermission } from "@/types/permissions";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { Authenticated, Unauthenticated, useQuery } from "convex/react";
 import { BadgeCheck, ChevronsUpDown, Edit, Loader2, LogIn, LogOut, Plus, Settings, Trash2 } from "lucide-react";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

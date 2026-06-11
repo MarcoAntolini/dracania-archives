@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { useMutation } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { useCookies } from "next-client-cookies";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useEffect, useState } from "react";
 
 export default function DonationSuccessPage({

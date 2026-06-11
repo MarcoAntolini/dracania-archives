@@ -2,7 +2,7 @@
 
 import CustomSeparator from "@/components/game/custom-separator";
 import news from "@/data/news";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import Link from "next/link";
 
 export default function Home() {

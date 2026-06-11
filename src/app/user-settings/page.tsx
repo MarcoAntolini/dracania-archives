@@ -12,7 +12,7 @@ import { NPCsFileNames } from "@/types/images/npcs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction, useQuery } from "convex/react";
 import { Loader2, Trash2 } from "lucide-react";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useEffect, useState, type MouseEvent } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";

@@ -9,7 +9,7 @@ import { ContributionStatus } from "@/types/enums/contributions";
 import type { DbItem, Item } from "@/types/items";
 import { useMutation, useQuery } from "convex/react";
 import { CheckIcon, XIcon } from "lucide-react";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useState } from "react";
 import { toast } from "sonner";
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { availableClasses } from "@/types/common/classes";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import Link from "next/link";
 
 export default function Items() {

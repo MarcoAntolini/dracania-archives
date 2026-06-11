@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import Link from "next/link";
 import { useState } from "react";
 import { isMobile } from "react-device-detect";

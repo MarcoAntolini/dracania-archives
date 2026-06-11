@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { api } from "@/convex/_generated/api";
 import { availableClasses } from "@/types/common/classes";
 import { useQuery } from "convex/react";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import Link from "next/link";
 import { MoonLoader } from "react-spinners";
 

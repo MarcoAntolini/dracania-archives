@@ -8,7 +8,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { GemRarities, GemTypes } from "@/types/consts";
 import type { GemType } from "@/types/gems";
 import { useMeasure } from "@uidotdev/usehooks";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 import { useEffect, useState } from "react";
 
 export default function GemsPage() {

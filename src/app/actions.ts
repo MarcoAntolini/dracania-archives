@@ -1,31 +1,43 @@
+import { siteConfig } from "@/lib/site-config";
 import type { Item } from "@/types/items";
 import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 import Stripe from "stripe";
 
-const mailerSend = new MailerSend({
-	apiKey: process.env.MAILERSEND_API_KEY as string,
-});
+const mailerSend = process.env.MAILERSEND_API_KEY
+	? new MailerSend({
+			apiKey: process.env.MAILERSEND_API_KEY,
+		})
+	: null;
 
-const stripe = new Stripe(process.env.STRIPE_KEY as string);
+const stripe = process.env.STRIPE_KEY ? new Stripe(process.env.STRIPE_KEY) : null;
+
+async function sendEmail(emailParams: EmailParams) {
+	if (!siteConfig.features.email || !mailerSend) {
+		console.warn("Email delivery skipped: MailerSend is not configured.");
+		return;
+	}
+
+	await mailerSend.email.send(emailParams);
+}
 
 export const sendFeedbackEmail = async ({ feedback, email }: { feedback: string; email?: string }) => {
 	const emailParams = new EmailParams()
-		.setFrom(new Sender("feedback@dracania-archives.com", "Dracania Archives Feedback"))
+		.setFrom(new Sender(siteConfig.emails.feedback, "Dracania Archives Feedback"))
 		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
 		.setSubject(`New Feedback from ${email ?? "Anonymous"}`)
 		.setText(feedback);
-	await mailerSend.email.send(emailParams);
+	await sendEmail(emailParams);
 };
 
 export const sendHourlyContributionEmail = async ({ items }: { items: Item[] }) => {
 	const emailParams = new EmailParams()
-		.setFrom(new Sender("contributor@dracania-archives.com", "Dracania Archives Contributor"))
+		.setFrom(new Sender(siteConfig.emails.contributor, "Dracania Archives Contributor"))
 		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
 		.setSubject(`New items awaiting approval`).setText(`
 			There are ${items.length} new items awaiting approval:
 			${items.map((item) => `- ${item.name} (${item.class})`).join("\n")}
 		`);
-	await mailerSend.email.send(emailParams);
+	await sendEmail(emailParams);
 };
 
 export const sendContributionEmail = async ({
@@ -38,7 +50,7 @@ export const sendContributionEmail = async ({
 	name: string;
 }) => {
 	const emailParams = new EmailParams()
-		.setFrom(new Sender("contributor@dracania-archives.com", "Dracania Archives Contributor"))
+		.setFrom(new Sender(siteConfig.emails.contributor, "Dracania Archives Contributor"))
 		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
 		.setSubject(`New ${className} ${type} contribution for Dracania Archives: ${name}`)
 		.setText(
@@ -48,21 +60,25 @@ export const sendContributionEmail = async ({
 					: "eyJjbGF1c2VzIjpbeyJvcCI6ImVxIiwiaWQiOiIwLjI4MzUwNTg3MTQyOTY0MSIsImZpZWxkIjoiYXBwcm92ZWQiLCJ2YWx1ZSI6ZmFsc2V9XX0"
 			}`,
 		);
-	await mailerSend.email.send(emailParams);
+	await sendEmail(emailParams);
 };
 
 export const sendPaymentEmail = async () => {
 	const emailParams = new EmailParams()
-		.setFrom(new Sender("donations@dracania-archives.com", "Dracania Archives Donations"))
+		.setFrom(new Sender(siteConfig.emails.donations, "Dracania Archives Donations"))
 		.setTo([new Recipient("marcoantolini.dev@gmail.com", "Marco Antolini")])
 		.setSubject("New donation for Dracania Archives")
 		.setText(
 			"A new donation has been made to Dracania Archives. Check the dashboard to verify it: https://dashboard.stripe.com/dashboard.",
 		);
-	await mailerSend.email.send(emailParams);
+	await sendEmail(emailParams);
 };
 
 export const createCheckoutSession = async ({ username, origin }: { username: string; origin: string }) => {
+	if (!stripe) {
+		return null;
+	}
+
 	const isDev = process.env.NODE_ENV === "development";
 	try {
 		const session = await stripe.checkout.sessions.create({
@@ -94,6 +110,10 @@ export const createCheckoutSession = async ({ username, origin }: { username: st
 };
 
 export const verifyPayment = async ({ sessionId }: { sessionId: string }) => {
+	if (!stripe) {
+		return null;
+	}
+
 	try {
 		const session = await stripe.checkout.sessions.retrieve(sessionId);
 		return {

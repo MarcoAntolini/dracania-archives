@@ -1,5 +1,5 @@
 import type { CommonJewel, CommonJewelEffect, MagicJewel, MythicJewel } from "@/data/db/jewels";
-import Image from "next/image";
+import { StaticImage as Image } from "@/components/ui/static-image";
 
 export default function RenderJewel({
 	jewel,
